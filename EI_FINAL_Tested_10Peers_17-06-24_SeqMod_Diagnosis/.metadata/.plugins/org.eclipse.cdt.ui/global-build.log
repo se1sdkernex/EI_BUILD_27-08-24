@@ -472,3 +472,46 @@ copying hex file to HEX folder
 EI_1.hex
         1 file(s) copied.
  
+18:05:54 **** Incremental Build of configuration Release for project EI_1 ****
+make -j12 all 
+del_hex.bat
+Current Folder: EI_1
+Deleting EI_1.hex
+ 
+arm-none-eabi-size   EI_1.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 107048	    996	  91124	 199168	  30a00	EI_1.elf
+Finished building: default.size.stdout
+ 
+copy_hex.bat
+A subdirectory or file ..\..\HEX already exists.
+copying hex file to HEX folder
+EI_1.hex
+        1 file(s) copied.
+ 
+18:06:00 **** Incremental Build of configuration Release for project EI_2 ****
+make -j12 all 
+del_hex.bat
+Current Folder: EI_2
+Deleting EI_2.hex
+ 
+arm-none-eabi-gcc -o "EI_2.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis\EI_2\STM32F769BITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="EI_2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: EI_2.elf
+ 
+arm-none-eabi-size   EI_2.elf 
+arm-none-eabi-objdump -h -S  EI_2.elf  > "EI_2.list"
+arm-none-eabi-objcopy  -O ihex  EI_2.elf  "EI_2.hex"
+   text	   data	    bss	    dec	    hex	filename
+ 106920	    996	  90956	 198872	  308d8	EI_2.elf
+Finished building: default.size.stdout
+ 
+Finished building: EI_2.hex
+ 
+Finished building: EI_2.list
+ 
+copy_hex.bat
+A subdirectory or file ..\..\HEX already exists.
+copying hex file to HEX folder
+EI_2.hex
+        1 file(s) copied.
+ 
