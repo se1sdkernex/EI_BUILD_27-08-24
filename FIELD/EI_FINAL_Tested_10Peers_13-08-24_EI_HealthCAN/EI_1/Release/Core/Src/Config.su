@@ -1,0 +1,7 @@
+../Core/Src/Config.c:29:6:Update_HitachiCommands	8	static
+../Core/Src/Config.c:61:1:__io_putchar	16	static
+../Core/Src/Config.c:71:6:Get_Slot	8	static
+../Core/Src/Config.c:321:9:Is_Command_Valid	24	static
+../Core/Src/Config.c:86:6:Check_for_cmd	120	static
+../Core/Src/Config.c:334:6:PrintCmdList	24	static
+../Core/Src/Config.c:345:6:SendCombineHealth	32	static

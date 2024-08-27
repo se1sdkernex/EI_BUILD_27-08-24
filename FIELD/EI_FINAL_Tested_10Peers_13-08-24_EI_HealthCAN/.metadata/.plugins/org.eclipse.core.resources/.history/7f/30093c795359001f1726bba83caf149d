@@ -1,0 +1,1348 @@
+/*
+ * Medha.c
+ *
+ *  Created on: Oct 6, 2023
+ *      Author: Ravi Teja P
+ */
+
+#include "Headers.h"
+
+
+uint8_t					Medha_CAN_Xchanging_Happening = 0;
+uint8_t					Received_CAN_Relay_Status  = 0;
+uint8_t 				EIPC_1_2_STATUS = 0;
+uint32_t				Last_Received_Medha_Self_sharing = 0;
+uint8_t Commands_ListMedha[20][50] = {{0,},};
+static uint8_t 	Commands_Count;
+
+
+
+
+MEDHA_EI_PKT_t			Medha_EI_Rx_Pkt_st;
+MEDHA_RELAY_STS_t 		Medha_Relay_Sts_st;
+MEDHA_FAULT_HANDLING_t 	Medha_Fault_Handler_st;
+MEDHA_FAULT_INJECTION_t	Medha_Fault_Injection_st;
+MEDHA_EI_SELF_SHARING_t	Medha_ei_self_sharing_TX_st,Medha_ei_self_sharing_RX_st,Medha_ei_self_sharing_Temp_st;
+MEDHA_CUR_RELAY_STS_t	Medha_Cur_Relay_Status_st,Medha_CAN_Relay_Status_st,Medha_Temp_relay_sts_t;
+
+
+const uint32_t Crc32_LookUp[256]=
+{
+		0x00000000,0x77073096,0xEE0E612C,0x990951BA,0x076DC419,0x706AF48F,0xE963A535,
+		0x9E6495A3,0x0EDB8832,0x79DCB8A4,0xE0D5E91E,0x97D2D988,0x09B64C2B,0x7EB17CBD,
+		0xE7B82D07,0x90BF1D91,0x1DB71064,0x6AB020F2,0xF3B97148,0x84BE41DE,0x1ADAD47D,
+		0x6DDDE4EB,0xF4D4B551,0x83D385C7,0x136C9856,0x646BA8C0,0xFD62F97A,0x8A65C9EC,
+		0x14015C4F,0x63066CD9,0xFA0F3D63,0x8D080DF5,0x3B6E20C8,0x4C69105E,0xD56041E4,
+		0xA2677172,0x3C03E4D1,0x4B04D447,0xD20D85FD,0xA50AB56B,0x35B5A8FA,0x42B2986C,
+		0xDBBBC9D6,0xACBCF940,0x32D86CE3,0x45DF5C75,0xDCD60DCF,0xABD13D59,0x26D930AC,
+		0x51DE003A,0xC8D75180,0xBFD06116,0x21B4F4B5,0x56B3C423,0xCFBA9599,0xB8BDA50F,
+		0x2802B89E,0x5F058808,0xC60CD9B2,0xB10BE924,0x2F6F7C87,0x58684C11,0xC1611DAB,
+		0xB6662D3D,0x76DC4190,0x01DB7106,0x98D220BC,0xEFD5102A,0x71B18589,0x06B6B51F,
+		0x9FBFE4A5,0xE8B8D433,0x7807C9A2,0x0F00F934,0x9609A88E,0xE10E9818,0x7F6A0DBB,
+		0x086D3D2D,0x91646c97,0xE6635C01,0x6B6B51F4,0x1C6C6162,0x856530D8,0xF262004E,
+		0x6C0695ED,0x1B01A57B,0x8208F4C1,0xF50FC457,0x65B0D9C6,0x12B7E950,0x8BBEB8EA,
+		0xFCB9887C,0x62DD1DDF,0x15DA2D49,0x8CD37CF3,0xFBD44C65,0x4DB26158,0x3AB551CE,
+		0xA3BC0074,0xD4BB30E2,0x4ADFA541,0x3DD895D7,0xA4D1C46D,0xD3D6F4FB,0x4369E96A,
+		0x346ED9FC,0xAD678846,0xDA60B8D0,0x44042D73,0x33031DE5,0xAA0A4C5F,0xDD0D7CC9,
+		0x5005713C,0x270241AA,0xBE0B1010,0xC90C2086,0x5768B525,0x206F85B3,0xB966D409,
+		0xCE61E49F,0x5EDEF90E,0x29D9C998,0xB0D09822,0xC7D7A8B4,0x59B33D17,0x2EB40D81,
+		0xB7BD5C3B,0xC0BA6CAD,0xEDB88320,0x9ABFB3B6,0x03B6E20C,0x74B1D29A,0xEAD54739,
+		0x9DD277AF,0x04DB2615,0x73DC1683,0xE3630B12,0x94643B84,0x0D6D6A3E,0x7A6A5AA8,
+		0xE40ECF0B,0x9309FF9D,0x0A00AE27,0x7D079EB1,0xF00F9344,0x8708A3D2,0x1E01F268,
+		0x6906C2FE,0xF762575D,0x806567CB,0x196C3671,0x6E6B06E7,0xFED41B76,0x89D32BE0,
+		0x10DA7A5A,0x67DD4ACC,0xF9B9DF6F,0x8EBEEFF9,0x17B7BE43,0x60B08ED5,0xD6D6A3E8,
+		0xA1D1937E,0x38D8C2C4,0x4FDFF252,0xD1BB67F1,0xA6BC5767,0x3FB506DD,0x48B2364B,
+		0xD80D2BDA,0xAF0A1B4C,0x36034AF6,0x41047A60,0xDF60EFC3,0xA867DF55,0x316E8EEF,
+		0x4669BE79,0xCB61B38C,0xBC66831A,0x256FD2A0,0x5268E236,0xCC0C7795,0xBB0B4703,
+		0x220216B9,0x5505262F,0xC5BA3BBE,0xB2BD0B28,0x2BB45A92,0x5CB36A04,0xC2D7FFA7,
+		0xB5D0CF31,0x2CD99E8B,0x5BDEAE1D,0x9B64C2B0,0xEC63F226,0x756AA39C,0x026D930A,
+		0x9C0906A9,0xEB0E363F,0x72076785,0x05005713,0x95BF4A82,0xE2B87A14,0x7BB12BAE,
+		0x0CB61B38,0x92D28E9B,0xE5D5BE0D,0x7CDCEFB7,0x0BDBDF21,0x86D3D2D4,0xF1D4E242,
+		0x68DDB3F8,0x1FDA836E,0x81BE16CD,0xF6B9265B,0x6FB077E1,0x18B74777,0x88085AE6,
+		0xFF0F6A70,0x66063BCA,0x11010B5C,0x8F659EFF,0xF862AE69,0x616BFFD3,0x166CCF45,
+		0xA00AE278,0xD70DD2EE,0x4E048354,0x3903B3C2,0xA7672661,0xD06016F7,0x4969474D,
+		0x3E6E77DB,0xAED16A4A,0xD9D65ADC,0x40DF0B66,0x37D83BF0,0xA9BCAE53,0xDEBB9EC5,
+		0x47B2CF7F,0x30B5FFE9,0xBDBDF21C,0xCABAC28A,0x53B39330,0x24B4A3A6,0xBAD03605,
+		0xCDD70693,0x54DE5729,0x23D967BF,0xB3667A2E,0xC4614AB8,0x5D681B02,0x2A6F2B94,
+		0xB40BBE37,0xC30C8EA1,0x5A05DF1B,0x2D02EF8D
+};
+
+
+void Process_Medha_EI(void)
+{
+	while(1)
+	{
+		Print_BuildDat_Details();
+
+		readCanToStructs();
+
+		Feed_wdt();
+
+		HAL_IWDG_Refresh(&hiwdg);
+
+		Medha_EI_Analyser();
+
+		Send_Relay_Statuses_2_MIE();
+
+		Process_Clear_Relays();
+
+		Send_Data_to_Other();
+
+		Process_Data_from_Other();
+
+		CheckforMedhaCMD();
+
+
+		if(Dats_Request_Flag > 0)
+		{
+			gucFlagUpdate = 3;
+			break;
+		}
+
+#if FAULT_INJECTION_ENABLED
+		Get_Command();
+#endif
+		Enable_UART_Interrupts();
+	}
+	while(1)
+	{
+		HAL_IWDG_Refresh(&hiwdg);
+		Data_Processing();
+	}
+}
+
+uint16_t Get_Medha_EI_Message(uint8_t ComPort,uint8_t *Buffer,uint16_t Buffer_Size)
+{
+	static uint8_t suc_RcvStatus = ONE;
+	uint16_t EI_pktlength=0;
+	static uint8_t suc_RByte = ZERO;
+	static uint16_t i = ZERO,j=ZERO;
+	static uint16_t sus_CRC = ZERO;
+	uint16_t us_ReturnBytes = ZERO;
+	static uint16_t SuiBuffer_Index = ZERO;
+	/* If data available on port read and store data */
+	while(Com_DataReady(ComPort))
+	{
+		suc_RByte = Com_Get_Byte(ComPort);
+		//printf("0x%02x ",suc_RByte);
+		switch(suc_RcvStatus)
+		{
+		case ONE: /* Receive Start of Message */
+			if(SOM_MEDHA == suc_RByte)
+			{
+				//Buffer[ZERO] = suc_RByte;
+				i = ONE;
+				suc_RcvStatus = TWO;
+			}
+			break;
+		case TWO:
+			switch(suc_RByte)
+			{
+			//			case THREE:
+			//				break;
+			default:
+				if(EIGHT == i )
+				{
+					Buffer[i] = suc_RByte;
+					i++;
+					suc_RcvStatus = FOUR;
+				}
+				else
+				{
+					Buffer[i] = suc_RByte;
+					i++;
+				}
+				break;
+			}
+			break;
+			case FOUR:
+				memcpy(&EI_pktlength,&Buffer[i-2],2);
+				//printf("PKT LENGTH:%u\n",EI_pktlength);
+				SuiBuffer_Index  = 0;
+				j=1;
+				Buffer[i] = suc_RByte;
+				SuiBuffer_Index++;
+				i++;
+				j++;
+				suc_RcvStatus = FIVE;
+				break;
+			case FIVE:
+				Buffer[i] = suc_RByte;
+				if ((EI_pktlength) > SuiBuffer_Index)
+				{
+					SuiBuffer_Index++;
+					i++;
+					j++;
+					if ((EI_pktlength) == (SuiBuffer_Index) )
+					{
+						sus_CRC = i - FOUR;
+						us_ReturnBytes = sus_CRC;
+						i = 0;
+						suc_RcvStatus = ONE;
+						EI_pktlength = 0;
+						if(us_ReturnBytes <= FOUR)
+						{
+							printf("\nHERE\n");
+							return ZERO;
+						}
+						if(CheckCRC32(0,Buffer,sus_CRC))
+						{
+							/*							printf("\nCRC OK\n");*/
+							return us_ReturnBytes;
+						}
+						else
+						{
+							printf("CRC NOK\n");
+							return ZERO;
+						}
+					}
+				}
+				else
+				{
+					i = 0;
+					suc_RcvStatus= 1;
+					EI_pktlength = 0;
+				}
+				break;
+			default:
+				break;
+		}
+	}	    /* End of While data ready */
+	return ZERO;
+}
+void Medha_EI_Analyser(void)
+{
+
+	uint16_t NoofBuffBytes 		= 0;
+	uint8_t EI_Buffer[300]		= "\0";
+	uint16_t NoOfInputs 		= 0;
+	uint16_t Traverser 			= 0;
+	uint8_t TempCompliment[128] = {0,};
+	uint16_t VitalCrcStartLoc 	= 0;
+	uint32_t CalcVitalCrc 		= 0;
+	MEDHA_EI_PKT_t Medha_EI_Temp_Rx_st;
+
+	NoofBuffBytes= Get_Medha_EI_Message(EI_data.Medha_Prms_st.Comport,EI_Buffer,sizeof(EI_Buffer));
+
+	if(NoofBuffBytes > 5)
+	{
+		printf("Raw Data:\n");
+		for(uint16_t i=0;i<NoofBuffBytes;++i)
+		{
+
+			if((i!=0) && ((i%10)==0))
+			{
+				printf("\n");
+			}
+			printf("%02X ",EI_Buffer[i]);
+		}
+		printf("\n");
+	}
+
+
+
+#if FAULT_INJECTION_ENABLED
+	if( (CHECKFLAG(EIPC_RX_FAIL_FI,Medha_Fault_Injection_st.FaultBits)==SET) && (NoofBuffBytes>0) )
+	{
+		printf("Injected EIPC_RX_FAILURE\n");
+		NoofBuffBytes  =0;
+	}
+#endif
+
+	if(NoofBuffBytes > 0)
+	{
+		memset(&Medha_EI_Temp_Rx_st,0,sizeof(MEDHA_EI_PKT_t));
+
+		BYTEINIT(0);
+		memcpy(&Medha_EI_Temp_Rx_st.SOM,&EI_Buffer[ucByte],1);
+		BYTEINC(1);
+
+		memcpy(&Medha_EI_Temp_Rx_st.Dest_Addr,&EI_Buffer[ucByte],2);
+
+#if FAULT_INJECTION_ENABLED
+		if(CHECKFLAG(DEST_ADDR_FI,Medha_Fault_Injection_st.FaultBits)==SET)
+		{
+			printf("\nActual Received Destination Address:%u\n",Medha_EI_Temp_Rx_st.Dest_Addr);
+			Medha_EI_Temp_Rx_st.Dest_Addr = HAL_RNG_GetRandomNumber(&hrng)%65000;
+			if(Medha_EI_Temp_Rx_st.Dest_Addr == Medha_Prms_st.Dest_Addr)
+			{
+				Medha_EI_Temp_Rx_st.Dest_Addr +=10;
+			}
+			printf("Injected Destination Address:%u\n",Medha_EI_Temp_Rx_st.Dest_Addr);
+		}
+#endif
+
+		if(EI_data.Medha_Prms_st.Dest_Addr != Medha_EI_Temp_Rx_st.Dest_Addr)
+		{
+			printf("Destination Address Not Matched - Packet Rejected\n");
+			printf("Configured:\"%u\" - Received:\"%u\"\n",EI_data.Medha_Prms_st.Dest_Addr,Medha_EI_Temp_Rx_st.Dest_Addr);
+			return;
+		}
+		BYTEINC(2);
+
+
+
+		memcpy(&Medha_EI_Temp_Rx_st.Source_Addr,&EI_Buffer[ucByte],2);
+#if FAULT_INJECTION_ENABLED
+
+		if(CHECKFLAG(SOURCE_ADDR_FI,Medha_Fault_Injection_st.FaultBits)==SET)
+		{
+			printf("\nActual Received Source Address:%u\n",Medha_EI_Temp_Rx_st.Source_Addr);
+			Medha_EI_Temp_Rx_st.Source_Addr = HAL_RNG_GetRandomNumber(&hrng)%65000;
+			if(Medha_EI_Temp_Rx_st.Source_Addr == Medha_Prms_st.Source_Addr)
+			{
+				Medha_EI_Temp_Rx_st.Source_Addr +=10;
+			}
+			printf("Injected Destination Address:%u\n",Medha_EI_Temp_Rx_st.Source_Addr);
+
+		}
+
+#endif
+
+		if(EI_data.Medha_Prms_st.Source_Addr != Medha_EI_Temp_Rx_st.Source_Addr)
+		{
+			printf("Source Address Not Matched - Packet Rejected\n");
+			printf("Configured:\"%u\" - Received:\"%u\"\n",EI_data.Medha_Prms_st.Source_Addr,Medha_EI_Temp_Rx_st.Source_Addr);
+			return;
+		}
+		BYTEINC(2);
+
+		memcpy(&Medha_EI_Temp_Rx_st.Channel_Type,&EI_Buffer[ucByte],1);
+
+#if FAULT_INJECTION_ENABLED
+
+		if(CHECKFLAG(CHANNEL_TYPE_FI,Medha_Fault_Injection_st.FaultBits)==SET)
+		{
+			printf("\nActual Received Channel_Type:%02X\n",Medha_EI_Temp_Rx_st.Channel_Type);
+			Medha_EI_Temp_Rx_st.Channel_Type = HAL_RNG_GetRandomNumber(&hrng)%254;
+			if( (Medha_EI_Temp_Rx_st.Channel_Type == CHANNEL_A) || (Medha_EI_Temp_Rx_st.Channel_Type == CHANNEL_B) )
+			{
+				Medha_EI_Temp_Rx_st.Channel_Type +=10;
+			}
+			printf("Injected Channel_Type:%02X\n",Medha_EI_Temp_Rx_st.Channel_Type);
+		}
+
+#endif
+
+		if( ! ( (Medha_EI_Temp_Rx_st.Channel_Type == CHANNEL_A) || (Medha_EI_Temp_Rx_st.Channel_Type ==CHANNEL_B) ) )
+		{
+			printf("Received from Unknown Channel:%02X - Packet Rejected\n",Medha_EI_Temp_Rx_st.Channel_Type);
+			return;
+		}
+		BYTEINC(1);
+
+
+		memcpy(&Medha_EI_Temp_Rx_st.Control_Byte,&EI_Buffer[ucByte],1);
+
+#if FAULT_INJECTION_ENABLED
+
+		if(CHECKFLAG(CONTROL_BYTE_FI,Medha_Fault_Injection_st.FaultBits)==SET)
+		{
+			printf("\nActual Received Control_Byte:%02X\n",Medha_EI_Temp_Rx_st.Control_Byte);
+			Medha_EI_Temp_Rx_st.Control_Byte = HAL_RNG_GetRandomNumber(&hrng)%254;
+			if(Medha_EI_Temp_Rx_st.Control_Byte == CONTROL_BYTE_RX)
+			{
+				Medha_EI_Temp_Rx_st.Control_Byte +=10;
+			}
+			printf("Injected Control_Byte:%02X\n",Medha_EI_Temp_Rx_st.Control_Byte);
+		}
+
+#endif
+
+		if( Medha_EI_Temp_Rx_st.Control_Byte != CONTROL_BYTE_RX )
+		{
+			printf("Received Unknown ControlByte:%02X - Packet Rejected\n",Medha_EI_Temp_Rx_st.Control_Byte);
+			return;
+		}
+
+		BYTEINC(1);
+
+
+		memcpy(&Medha_EI_Temp_Rx_st.Length,&EI_Buffer[ucByte],2);
+		BYTEINC(2);
+
+		memcpy(&Medha_EI_Temp_Rx_st.Packet_Number,&EI_Buffer[ucByte],1);
+		BYTEINC(1);
+
+		memcpy(&Medha_EI_Temp_Rx_st.Reserved1,&EI_Buffer[ucByte],7);
+		BYTEINC(7);
+
+		memcpy(&Medha_EI_Temp_Rx_st.Health_Status,&EI_Buffer[ucByte],1);
+
+#if FAULT_INJECTION_ENABLED
+
+		if(CHECKFLAG(EI_HEALTH_FAIL_FI,Medha_Fault_Injection_st.FaultBits)==SET)
+		{
+			printf("\nActual Received Health_Status:%02X\n",Medha_EI_Temp_Rx_st.Health_Status);
+			Medha_EI_Temp_Rx_st.Health_Status = HAL_RNG_GetRandomNumber(&hrng)%254;
+			if (Medha_EI_Temp_Rx_st.Health_Status == HEALTH_OK)
+			{
+				Medha_EI_Temp_Rx_st.Health_Status +=10;
+			}
+			printf("Injected Health_Status:%02X\n",Medha_EI_Temp_Rx_st.Health_Status);
+		}
+
+#endif
+
+		if(Medha_EI_Temp_Rx_st.Health_Status != HEALTH_OK)
+		{
+			printf("MEDHA-EI HEALTH \"NOT-OK\"... \nReceived Health:%02x\nPacket Rejected.\n",Medha_EI_Temp_Rx_st.Health_Status);
+			return;
+		}
+
+		BYTEINC(1);
+
+		VitalCrcStartLoc = ucByte;
+		memcpy(&Medha_EI_Temp_Rx_st.NoofRelays,&EI_Buffer[ucByte],2);
+
+#if FAULT_INJECTION_ENABLED
+
+		if(CHECKFLAG(NO_OF_RELAYS_FI,Medha_Fault_Injection_st.FaultBits)==SET)
+		{
+			printf("\nActual Received NoofRelays:%u\n",Medha_EI_Temp_Rx_st.NoofRelays);
+			Medha_EI_Temp_Rx_st.NoofRelays = HAL_RNG_GetRandomNumber(&hrng)%254;
+			if( Medha_EI_Temp_Rx_st.NoofRelays == Medha_Prms_st.NoofRelays )
+			{
+				Medha_EI_Temp_Rx_st.NoofRelays +=10;
+			}
+			printf("Injected NoofRelays:%u\n",Medha_EI_Temp_Rx_st.NoofRelays);
+		}
+
+#endif
+
+		if(Medha_EI_Temp_Rx_st.NoofRelays>1024)
+		{
+			printf("No of Relays Exceeding 1024 Inputs\nNo of Relays Received:%u\nSo Packet Rejected\n",Medha_EI_Temp_Rx_st.NoofRelays);
+			return;
+		}
+
+		if(Medha_EI_Temp_Rx_st.NoofRelays != EI_data.Medha_Prms_st.NoofRelays)
+		{
+			printf("No of Relays Not Matching...\nConfigured:%u - Received:%u\n",EI_data.Medha_Prms_st.NoofRelays,Medha_EI_Temp_Rx_st.NoofRelays);
+
+			if(strcmp((char *)EI_data.STN_NAME,(char *)"LAB_TESTING") == 0)
+			{
+				return;
+			}
+		}
+
+		BYTEINC(2);
+
+		/*		printf("MedhaEI_Rx_Temp_Pkt_st.NoofRelays:%u\n",MedhaEI_Rx_Temp_Pkt_st.NoofRelays); */
+
+		NoOfInputs = (Medha_EI_Temp_Rx_st.NoofRelays % 8);
+		if (NoOfInputs != 0)
+		{
+			NoOfInputs = ((Medha_EI_Temp_Rx_st.NoofRelays / 8)) + 1; //	including 0th buffer
+		}
+		else
+		{
+			NoOfInputs = (Medha_EI_Temp_Rx_st.NoofRelays / 8);
+		}
+
+		for(Traverser=0;Traverser<NoOfInputs;++Traverser)
+		{
+			Medha_EI_Temp_Rx_st.RelayStatus[Traverser] = EI_Buffer[ucByte];
+			TempCompliment[Traverser] = ~(Medha_EI_Temp_Rx_st.RelayStatus[Traverser]);
+			BYTEINC(1);
+			/*			printf("%02X ",MedhaEI_Rx_Temp_Pkt_st.RelayStatus[Traverser]);*/
+		}
+
+		/*
+		 * printf("\n");
+		 * printf("Compliement Data\n");
+		 *
+		 */
+
+		for(Traverser=0;Traverser<NoOfInputs;++Traverser)
+		{
+			Medha_EI_Temp_Rx_st.Comp_RelayStatus[Traverser] = EI_Buffer[ucByte];
+			BYTEINC(1);
+			/*			printf("%02X \n",Medha_EI_Temp_Rx_st.Comp_RelayStatus[Traverser]);*/
+		}
+		/*		printf("\n");*/
+
+
+#if FAULT_INJECTION_ENABLED
+
+		if(CHECKFLAG(CMPLMT_FAIL_FI,Medha_Fault_Injection_st.FaultBits)==SET)
+		{
+
+			uint8_t Index = HAL_RNG_GetRandomNumber(&hrng)%NoOfInputs;
+
+			printf("Injecting Compliment verification failure at Index:%u\n",Index);
+			printf("\nActual Received Compliment value:%02X\n",Medha_EI_Temp_Rx_st.Comp_RelayStatus[Index]);
+
+			uint8_t Cmplmt_fault_value = HAL_RNG_GetRandomNumber(&hrng)%255;
+
+			if( Medha_EI_Temp_Rx_st.Comp_RelayStatus[Index] == Cmplmt_fault_value )
+			{
+				Medha_EI_Temp_Rx_st.Comp_RelayStatus[Index] +=10;
+			}
+			printf("Injected Received Compliment value:%02X\n",Medha_EI_Temp_Rx_st.Comp_RelayStatus[Index]);
+		}
+
+#endif
+
+		if(memcmp(Medha_EI_Temp_Rx_st.Comp_RelayStatus,TempCompliment,NoOfInputs) != 0)
+		{
+			printf("Relay Data Compliment Verification Failed\nReceived Relay Compliment Status:\n");
+			for(Traverser = 0;Traverser<NoOfInputs;++Traverser)
+			{
+				printf("%02X ",Medha_EI_Temp_Rx_st.Comp_RelayStatus[Traverser]);
+			}
+
+			printf("\nExpected Compliment Relay Status:\n");
+
+			for(Traverser = 0;Traverser<NoOfInputs;++Traverser)
+			{
+				printf("%02X ",TempCompliment[Traverser]);
+			}
+
+			printf("\nPACKET Rejected\n");
+			return;
+		}
+
+
+		CalcVitalCrc = GetCRC32(VitalCrcStartLoc, EI_Buffer, ucByte);
+		memcpy(&Medha_EI_Temp_Rx_st.Vital_CRC, &EI_Buffer[ucByte],4);
+
+
+
+#if FAULT_INJECTION_ENABLED
+
+		if(CHECKFLAG(VITAL_CRC_FAIL_FI,Medha_Fault_Injection_st.FaultBits)==SET)
+		{
+			printf("\nActual Received Vital_CRC:0x%08lx\n",Medha_EI_Temp_Rx_st.Vital_CRC);
+			Medha_EI_Temp_Rx_st.Vital_CRC = HAL_RNG_GetRandomNumber(&hrng)%0xffffffff;
+			if( Medha_EI_Temp_Rx_st.Vital_CRC == CalcVitalCrc )
+			{
+				Medha_EI_Temp_Rx_st.Vital_CRC +=10;
+			}
+			printf("Injected Vital_CRC:0x%08lx\n",Medha_EI_Temp_Rx_st.Vital_CRC);
+		}
+
+#endif
+
+
+
+		if(CalcVitalCrc != Medha_EI_Temp_Rx_st.Vital_CRC)
+		{
+			printf("Vital CRC Failed....\nCalc:0X%08lX|Recv:0X%08lX\nPacket Rejected\n",CalcVitalCrc,Medha_EI_Temp_Rx_st.Vital_CRC);
+			return;
+		}
+		BYTEINC(4);
+
+		memcpy(&Medha_EI_Temp_Rx_st.Reserved2, &EI_Buffer[ucByte],2);
+		BYTEINC(2);
+
+		/* ******************************************************* PROCESS VALID PACKET STEPS ↓ ******************************************************* */
+
+		//printf("\n                     ELAPSED_TICKS:%lu\n",HAL_Elaps_Ticks(Medha_Fault_Handler_st.Pkt_Rcv_clk));
+		Medha_Fault_Handler_st.Pkt_Rcv_clk = HAL_GetTick();
+		memcpy(&Medha_EI_Rx_Pkt_st,&Medha_EI_Temp_Rx_st,sizeof(MEDHA_EI_PKT_t));
+
+		Medha_ei_self_sharing_TX_st.Receiving_Status = RECEIVED;
+		Medha_ei_self_sharing_TX_st.Vital_CRC = Medha_EI_Rx_Pkt_st.Vital_CRC;
+
+		Send_Medha_EI_Reply(NoOfInputs); /* TO ACKNOWLEDGE THE PACKET */
+
+
+		for(Traverser=0;Traverser<NoOfInputs;++Traverser)
+		{
+			//Medha_Cur_Relay_Status_st.Relay_Status[Traverser] = ROTATE_BYTE(Medha_EI_Temp_Rx_st.RelayStatus[Traverser]);
+			Medha_Cur_Relay_Status_st.Relay_Status[Traverser] = (Medha_EI_Temp_Rx_st.RelayStatus[Traverser]);
+		}
+		Medha_Cur_Relay_Status_st.Vital_CRC = Medha_EI_Rx_Pkt_st.Vital_CRC;
+
+		if(memcmp(Medha_Temp_relay_sts_t.Relay_Status,Medha_Cur_Relay_Status_st.Relay_Status,NoOfInputs)!=0)
+		{
+			memcpy(&Medha_Temp_relay_sts_t.Relay_Status,&Medha_Cur_Relay_Status_st.Relay_Status,NoOfInputs);
+			Medha_Temp_relay_sts_t.Vital_CRC = Medha_Cur_Relay_Status_st.Vital_CRC;
+
+			memset(&Medha_Relay_Sts_st.Relay_Sts,0,sizeof(MEDHA_RELAY_STS_t));
+			//InsertBits(0, 16, &Medha_Relay_Sts_st.Relay_Sts[0], Medha_Prms_st.NoofRelays);
+			memcpy(&Medha_Relay_Sts_st.Relay_Sts,Medha_Cur_Relay_Status_st.Relay_Status,NoOfInputs);
+#ifdef EI_1
+			TransmitCanPkt(EI_PROCESS_DATA);
+#endif
+			Medha_Fault_Handler_st.Relay_sending_clk = HAL_GetTick();
+
+			printf("CAN Packet sent to MIE\n");
+
+
+#ifdef EI_1
+			TransmitCanPkt(EI_1_SELF_SHARING);
+#endif
+#ifdef EI_2
+			TransmitCanPkt(EI_2_SELF_SHARING);
+#endif
+
+			if(Medha_ei_self_sharing_RX_st.Vital_CRC == 0)
+			{
+#ifdef EI_1
+				TransmitCanPkt(EIPC1_RELAYS_2_OTHER);
+#endif
+#ifdef EI_2
+				TransmitCanPkt(EIPC2_RELAYS_2_OTHER);
+#endif
+			}
+
+		}
+
+		printf("\n__________ RCV MSG DETAILS __________\n");
+		printf("DA:%5u|",Medha_EI_Temp_Rx_st.Dest_Addr);
+		printf("SA:%5u|",Medha_EI_Temp_Rx_st.Source_Addr);
+		printf("CT:%02X|",Medha_EI_Temp_Rx_st.Channel_Type);
+		printf("CB:%02X|",Medha_EI_Temp_Rx_st.Control_Byte);
+		printf("L :%5u|",Medha_EI_Temp_Rx_st.Length);
+		printf("PN:%3u|",Medha_EI_Temp_Rx_st.Packet_Number);
+		printf("TS:%02x:%02x:%02x|%02x/%02x/%02x|",Medha_EI_Temp_Rx_st.Reserved1[3],Medha_EI_Temp_Rx_st.Reserved1[2],Medha_EI_Temp_Rx_st.Reserved1[1],Medha_EI_Temp_Rx_st.Reserved1[4],Medha_EI_Temp_Rx_st.Reserved1[5],Medha_EI_Temp_Rx_st.Reserved1[6]);
+		printf("HS:%02X|",Medha_EI_Temp_Rx_st.Health_Status);
+		printf("RC:%5u\n",Medha_EI_Temp_Rx_st.NoofRelays);
+		printf("SIGNAL DATA       :");
+		for(Traverser=0;Traverser<NoOfInputs;++Traverser)
+		{
+			if((Traverser!=0) && ((Traverser%10)==0))
+			{
+				printf("\n                   ");
+			}
+			printf("%02X ",Medha_Cur_Relay_Status_st.Relay_Status[Traverser]);
+		}
+		printf("\n");
+		printf("__________ RCV MSG DETAILS __________\n");
+		return;
+	}
+	else
+	{
+		return;
+	}
+}
+
+void Send_Medha_EI_Reply(uint16_t Outputs)
+{
+	uint8_t Transmit_Buff[300] = {0,};
+	uint32_t Cal_Crc =0;
+	uint8_t Message_Length_Loc = 0;
+	uint16_t Message_Lengh = 0;
+	BYTEINIT(0);
+
+	Transmit_Buff[ucByte] = SOM_MEDHA;
+	BYTEINC(1);
+
+	memcpy(&Transmit_Buff[ucByte],&Medha_EI_Rx_Pkt_st.Source_Addr,2);
+	BYTEINC(2);
+
+	memcpy(&Transmit_Buff[ucByte],&Medha_EI_Rx_Pkt_st.Dest_Addr,2);
+	BYTEINC(2);
+
+	memcpy(&Transmit_Buff[ucByte],&Medha_EI_Rx_Pkt_st.Channel_Type,1);
+	BYTEINC(1);
+
+	Transmit_Buff[ucByte] = CONTROL_BYTE_TX;
+	BYTEINC(1);
+
+	Message_Length_Loc = ucByte;
+	Transmit_Buff[ucByte] = 0;
+	Transmit_Buff[ucByte+1] = 0;
+	/*	 Add Message Length at Last.*/
+	BYTEINC(2);
+
+	memcpy(&Transmit_Buff[ucByte],&Medha_EI_Rx_Pkt_st.Packet_Number,1);
+	BYTEINC(1);
+
+	/*	/////////////////////////////////////////////////////////////////*/
+	memcpy(&Transmit_Buff[ucByte],&Medha_EI_Rx_Pkt_st.Reserved1,7);
+	BYTEINC(7);
+	/*	/////////////////////////////////////////////////////////////////*/
+
+	memcpy(&Transmit_Buff[ucByte],&Medha_EI_Rx_Pkt_st.NoofRelays,2);
+	BYTEINC(2);
+
+	memcpy(&Transmit_Buff[ucByte],&Medha_EI_Rx_Pkt_st.RelayStatus,Outputs);
+	BYTEINC(Outputs);
+
+	memcpy(&Transmit_Buff[ucByte],&Medha_EI_Rx_Pkt_st.Comp_RelayStatus,Outputs);
+	BYTEINC(Outputs);
+
+	Transmit_Buff[ucByte]=0;
+	Transmit_Buff[ucByte]=0;
+	BYTEINC(2); /*RESERVED2*/
+
+	/*
+	 * Here Message Length will be Calculated from Packet_Number to Message_CRC(Both Included).
+	 * "ucByte" is current Packet Length(from SOM to Reserved Including both).
+	 * "Message_Length_Loc" is Size before Message_length field excluding the Length 2 Bytes.
+	 * To get Message Length we calculated like below.
+	 *
+	 * Message_Length = (     (current Packet Length+"CRC_SIZE") - (Message_Length_Location + "MSG_LEN_SIZE") )
+	 */
+	Message_Lengh = ( (ucByte+4)-(Message_Length_Loc+2));
+	memcpy(&Transmit_Buff[Message_Length_Loc],&Message_Lengh,2);
+
+	Cal_Crc = GetCRC32(0,Transmit_Buff,ucByte);
+	memcpy(&Transmit_Buff[ucByte],&Cal_Crc,4);
+	BYTEINC(4);
+
+
+
+	/*
+
+
+	printf("\nSending Reply Packet:\n");
+	for (uint16_t Traverser = 0;Traverser<ucByte;++Traverser)
+	{
+		if((Traverser!=0) && ((Traverser%20)==0) )
+		{
+			printf("\n");
+		}
+		printf("%02x ",Transmit_Buff[Traverser]);
+	}
+	printf("\n");
+	 */
+
+	for(uint16_t Traverser = 0;Traverser<ucByte;++Traverser)
+	{
+		Com_SendByte(EI_data.Medha_Prms_st.Comport, Transmit_Buff[Traverser]);
+	}
+	return;
+}
+
+
+void Send_Relay_Statuses_2_MIE(void)
+{
+	if(HAL_Elaps_Ticks(Medha_Fault_Handler_st.Relay_sending_clk) >= EI_data.Medha_Prms_st.SendSignal2MIE_CLK)
+	{
+		uint16_t NoOfInputs = 0;
+		(EI_data.Medha_Prms_st.NoofRelays%8)?(NoOfInputs=((EI_data.Medha_Prms_st.NoofRelays / 8)) + 1):(NoOfInputs = (EI_data.Medha_Prms_st.NoofRelays / 8));
+
+		Medha_Fault_Handler_st.Relay_sending_clk = HAL_GetTick();
+		printf("SendingRelaysToMIE:\n");
+		//		for(uint32_t Traverser=0;Traverser<(sizeof(Medha_Relay_Sts_st));++Traverser)
+
+
+		for(uint32_t Traverser=0;Traverser<(NoOfInputs);++Traverser)
+
+		{
+			if( (Traverser!=0) && ( (Traverser%20)==0) )
+			{
+				printf("\n");
+			}
+			printf("%02X ",Medha_Relay_Sts_st.Relay_Sts[Traverser]);
+		}
+		printf("\n");
+
+#ifdef EI_1
+		TransmitCanPkt(EI_PROCESS_DATA);
+#endif
+	}
+}
+
+void Process_Clear_Relays(void)
+{
+	static uint32_t Last_Clear_clk = 0;
+	uint32_t Last_Received_Elaps = (HAL_Elaps_Ticks(Medha_Fault_Handler_st.Pkt_Rcv_clk));
+	uint32_t Timeout =  (EI_data.Medha_Prms_st.Packet_Interval_ms * EI_data.Medha_Prms_st.Packet_Timeout_Count);
+
+
+	if(strcmp((char *)EI_data.STN_NAME,(char *)"LAB_TESTING") == 0)
+	{
+		return;
+	}
+
+
+
+
+	if( ( (Last_Received_Elaps >= Timeout) && (Last_Clear_clk != Medha_Fault_Handler_st.Pkt_Rcv_clk) && (Medha_ei_self_sharing_RX_st.MisMatch_CNT > EI_data.Medha_Prms_st.Max_Mismatch_value) )
+			||((Medha_Fault_Handler_st.Clear_Relay_Statuses >= 1) && (Medha_Cur_Relay_Status_st.Vital_CRC != 0))
+	)
+	{
+		printf("Medha_Fault_Handler_st.Clear_Relay_Statuses:%u\n",Medha_Fault_Handler_st.Clear_Relay_Statuses);
+
+		if(CHECKFLAG(MISMATCH_CNT_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses) == SET)
+		{
+			CLEAR_BIT_USER(MISMATCH_CNT_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses);
+		}
+		if(CHECKFLAG(CAN_EXCHANGE_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses) == SET)
+		{
+			CLEAR_BIT_USER(CAN_EXCHANGE_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses);
+		}
+		memset(&Medha_Cur_Relay_Status_st,0,sizeof(MEDHA_CUR_RELAY_STS_t));
+		memset(&Medha_Relay_Sts_st,0,sizeof(MEDHA_RELAY_STS_t));
+		memset(&Medha_Temp_relay_sts_t,0,sizeof(MEDHA_CUR_RELAY_STS_t));
+		memset(&Medha_ei_self_sharing_TX_st,0,sizeof(MEDHA_EI_SELF_SHARING_t));
+		memset(&Medha_ei_self_sharing_RX_st,0,sizeof(MEDHA_EI_SELF_SHARING_t));
+		memset(&Medha_ei_self_sharing_Temp_st,0,sizeof(MEDHA_EI_SELF_SHARING_t));
+		printf("Cleared Relay Statuses\n");
+		Last_Clear_clk =Medha_Fault_Handler_st.Pkt_Rcv_clk;
+	}
+}
+
+
+void Send_Data_to_Other(void)
+{
+	static uint32_t Send_Sharing_CLK1 = 0;
+	static uint32_t Send_Sharing_CLK2 = 0;
+
+
+#if 0
+	if(Medha_Fault_Handler_st.Pkt_Rcv_clk == 0)
+	{
+		return;
+	}
+
+	if(  ((Medha_Fault_Handler_st.Pkt_Rcv_clk - Send_Sharing_CLK) >= EI_data.Medha_Prms_st.CAN_Xchange_Time) && (Send_Sharing_CLK != Medha_Fault_Handler_st.Pkt_Rcv_clk))
+	{
+		Send_Sharing_CLK = Medha_Fault_Handler_st.Pkt_Rcv_clk;
+
+#ifdef EI_1
+		TransmitCanPkt(MEDHA_EI1_SELF_SHARING);
+#endif
+#ifdef EI_2
+		TransmitCanPkt(MEDHA_EI2_SELF_SHARING);
+#endif
+
+	}
+#else
+
+
+
+	if(HAL_Elaps_Ticks(Medha_Fault_Handler_st.Pkt_Rcv_clk) >= (EI_data.Medha_Prms_st.Packet_Interval_ms * EI_data.Medha_Prms_st.Packet_Timeout_Count ) )
+	{
+		if(Medha_ei_self_sharing_TX_st.Receiving_Status != NOT_RECEIVED)
+		{
+			Medha_ei_self_sharing_TX_st.Receiving_Status = NOT_RECEIVED;
+		}
+	}
+
+
+	if( (HAL_Elaps_Ticks(Medha_Fault_Handler_st.Pkt_Rcv_clk) > EI_data.Medha_Prms_st.CAN_Xchange_Time) && (Send_Sharing_CLK1 != Medha_Fault_Handler_st.Pkt_Rcv_clk) )
+	{
+		Send_Sharing_CLK1 = Medha_Fault_Handler_st.Pkt_Rcv_clk;
+#ifdef EI_1
+		TransmitCanPkt(EI_1_SELF_SHARING);
+#endif
+#ifdef EI_2
+		TransmitCanPkt(EI_2_SELF_SHARING);
+#endif
+
+
+	}
+	else if(  (HAL_Elaps_Ticks(Send_Sharing_CLK2) > ONE_SEC)  && (HAL_Elaps_Ticks(Medha_Fault_Handler_st.Pkt_Rcv_clk) > TWO_SEC ))
+	{
+
+		Send_Sharing_CLK2 = HAL_GetTick();
+
+#ifdef EI_1
+		TransmitCanPkt(EI_1_SELF_SHARING);
+#endif
+#ifdef EI_2
+		TransmitCanPkt(EI_2_SELF_SHARING);
+#endif
+
+	}
+#endif
+}
+
+void Process_Data_from_Other(void)
+{
+
+
+	/*
+	 * NRCV = NOT_RECEIVING
+	 * RCV	= RECEIVING
+	 *
+	 */
+	static uint32_t Prev_Receive_CLK = 0;
+	//static uint8_t MisMatch_CNT = 0;
+	static uint32_t Previous_Clock_RCV_SELF_XCHG_CLK = 0;
+
+
+	if( (Prev_Receive_CLK != Last_Received_Medha_Self_sharing) || ( (HAL_Elaps_Ticks(Prev_Receive_CLK)) >= ONE_SEC) )
+	{
+		Prev_Receive_CLK = HAL_GetTick();
+		if(Medha_ei_self_sharing_TX_st.Receiving_Status)
+		{
+			SET_BIT_USER(0,EIPC_1_2_STATUS);
+		}
+		else
+		{
+			CLEAR_BIT_USER(0,EIPC_1_2_STATUS);
+		}
+		if(Medha_ei_self_sharing_RX_st.Receiving_Status)
+		{
+			SET_BIT_USER(1,EIPC_1_2_STATUS);
+		}
+		else
+		{
+			CLEAR_BIT_USER(1,EIPC_1_2_STATUS);
+		}
+
+		switch(EIPC_1_2_STATUS)
+		{
+		case SELF_NRCV_OTHER_NRCV:
+			Medha_ei_self_sharing_TX_st.MisMatch_CNT++;
+			break;
+
+		case SELF_NRCV_OTHER_RCV:
+			if(Medha_ei_self_sharing_RX_st.Vital_CRC != Medha_ei_self_sharing_TX_st.Vital_CRC)
+			{
+				if( (Received_CAN_Relay_Status == YES) )
+				{
+
+					printf("Self_Vital_CRC :%08lx\n",Medha_ei_self_sharing_TX_st.Vital_CRC);
+					printf("Other_Vital_CRC:%08lx\n",Medha_ei_self_sharing_RX_st.Vital_CRC);
+					Received_CAN_Relay_Status=NO;
+					printf("Copies Relays status and VITAL CRC from Other Card\n");
+					memcpy(&Medha_Cur_Relay_Status_st,&Medha_CAN_Relay_Status_st,sizeof(MEDHA_CUR_RELAY_STS_t));
+					memcpy(&Medha_Relay_Sts_st,&Medha_Cur_Relay_Status_st,sizeof(Medha_Relay_Sts_st));
+					Medha_ei_self_sharing_TX_st.Vital_CRC = Medha_Cur_Relay_Status_st.Vital_CRC;
+				}
+			}
+			else
+			{
+				Medha_ei_self_sharing_TX_st.MisMatch_CNT = 0;
+				CLEAR_BIT_USER(MISMATCH_CNT_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses);
+				//printf("\nCLEAR 1\n");
+			}
+			break;
+
+		case SELF_RCV_OTHER_NRCV:
+			if(Medha_ei_self_sharing_RX_st.Vital_CRC != Medha_ei_self_sharing_TX_st.Vital_CRC)
+			{
+				printf("Self & Other Vital CRC Not Matching\n");
+				Medha_ei_self_sharing_TX_st.MisMatch_CNT++;
+
+				if( (Medha_ei_self_sharing_TX_st.MisMatch_CNT > 2) && (Medha_Cur_Relay_Status_st.Vital_CRC != 0) )
+				{
+#ifdef EI_1
+					TransmitCanPkt(EIPC1_RELAYS_2_OTHER);
+#endif
+#ifdef EI_2
+					TransmitCanPkt(EIPC2_RELAYS_2_OTHER);
+#endif
+				}
+			}
+			else
+			{
+				CLEAR_BIT_USER(MISMATCH_CNT_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses);
+				//printf("\nCLEAR 2\n");
+				Medha_ei_self_sharing_TX_st.MisMatch_CNT=0;
+			}
+			break;
+
+		case SELF_RCV_OTHER_RCV:
+			if(Medha_ei_self_sharing_RX_st.Vital_CRC != Medha_ei_self_sharing_TX_st.Vital_CRC)
+			{
+				printf("Self & Other Vital CRC Not Matching\n");
+				Medha_ei_self_sharing_TX_st.MisMatch_CNT++;
+			}
+			else
+			{
+				//printf("\nCLEAR 3\n");
+				CLEAR_BIT_USER(MISMATCH_CNT_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses);
+				Medha_ei_self_sharing_TX_st.MisMatch_CNT=0;
+			}
+			break;
+		}
+
+		if(Medha_ei_self_sharing_TX_st.MisMatch_CNT >= EI_data.Medha_Prms_st.Max_Mismatch_value)
+		{
+			if(CHECKFLAG(MISMATCH_CNT_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses) == CLEAR)
+			{
+				printf("MisMatch Count Reached\n");
+				Medha_ei_self_sharing_TX_st.MisMatch_CNT = 0;
+				SET_BIT_USER(MISMATCH_CNT_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses);
+			}
+		}
+		//		else
+		//		{
+		//			//printf("\nMisMatch_CNT:%u\n",Medha_ei_self_sharing_TX_st.MisMatch_CNT);
+		//		}
+	}
+
+	if(HAL_Elaps_Ticks(Last_Received_Medha_Self_sharing) > EI_data.Medha_Prms_st.CAN_Xchange_Tout)
+	{
+		if(Previous_Clock_RCV_SELF_XCHG_CLK != Last_Received_Medha_Self_sharing)
+		{
+			Previous_Clock_RCV_SELF_XCHG_CLK = Last_Received_Medha_Self_sharing;
+			printf("CAN Data Not Received from last %lu Seconds\n",(HAL_Elaps_Ticks(Last_Received_Medha_Self_sharing)/1000));
+			printf("Last_Received_Medha_Self_sharing:%lu\n",Last_Received_Medha_Self_sharing);
+			if(CHECKFLAG(CAN_EXCHANGE_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses) == CLEAR)
+			{
+				SET_BIT_USER(CAN_EXCHANGE_FAIL,Medha_Fault_Handler_st.Clear_Relay_Statuses);
+			}
+		}
+	}
+}
+
+
+void Print_Medha_Self_Details(void)
+{
+#ifdef EI_1
+	printf("\n ______________________________ EI_1_SELF_DETAILS ______________________________ \n");
+#endif
+#ifdef EI_2
+	printf("\n ______________________________ EI_2_SELF_DETAILS ______________________________ \n");
+#endif
+
+	printf("Source Address                :%u\n",EI_data.Medha_Prms_st.Source_Addr);
+	printf("Destination Address           :%u\n",EI_data.Medha_Prms_st.Dest_Addr);
+	printf("Configured RS-485 port Number :%u\n",EI_data.Medha_Prms_st.Comport);
+	printf("RS-485_BaudRate               :%lu\n",EI_data.Medha_Prms_st.BaudRate);
+	printf("ExchangeAfter PKT Reception_ms:%lu\n",EI_data.Medha_Prms_st.CAN_Xchange_Time);
+	printf("ExchangeAfter PKT Timeout_ms  :%lu\n",EI_data.Medha_Prms_st.CAN_Xchange_Tout);
+	printf("Max_Mismatch_value            :%u\n",EI_data.Medha_Prms_st.Max_Mismatch_value);
+	printf("NoofRelays                    :%u\n",EI_data.Medha_Prms_st.NoofRelays);
+	printf("Packet_Interval_ms            :%lu\n",EI_data.Medha_Prms_st.Packet_Interval_ms);
+	printf("Packet_Timeout_Count          :%u\n",EI_data.Medha_Prms_st.Packet_Timeout_Count);
+	printf("SendSignal2MIE_CLK            :%lu\n",EI_data.Medha_Prms_st.SendSignal2MIE_CLK);
+
+
+#ifdef EI_1
+	printf("\n ______________________________ EI_1_SELF_DETAILS ______________________________ \n");
+#endif
+#ifdef EI_2
+	printf("\n ______________________________ EI_2_SELF_DETAILS ______________________________ \n");
+#endif
+}
+
+
+void CheckforMedhaCMD(void)
+{
+	//	unsigned char ch[20] = {0,},i=0;
+	uint8_t IS_COMMAND_RECEIVED = NO;
+	uint8_t Index = 0;
+	uint8_t Byte = 0;
+	uint8_t Buffer[100] = {0,};
+	if(HAL_Elaps_Ticks(Isp_Intr_Clk) < 10)
+	{
+		return;
+	}
+	else
+	{
+		while(Com_DataReady(ISP_PORT))
+		{
+			Byte = Com_Get_Byte(ISP_PORT);
+			Buffer[Index++] = Byte;
+		}
+		if(Index>0)
+		{
+			Buffer[Index] = 0;
+			printf("Received from ISP:%s\n",Buffer);
+			switch(Is_MedhaCommand_Valid(Buffer,Index))
+			{
+			case ZERO:
+				Dats_Request_Flag = 1;
+				printf("\n*************PLEASE LOAD EI DATS USING APPLICATION************\n");
+				break;
+			case ONE:
+				printf("Received \"%s\":%u\n",Commands_ListMedha[ONE],(Buffer[Index-1])-'0');
+				if( (((Buffer[Index-1])-'0') >= 0) && ((Buffer[Index-1])-'0') < 3)
+				{
+					Debug_flag = (Buffer[Index-1])-'0';
+				}
+				else
+				{
+					printf("Please Send Valid Command\n");
+				}
+				IS_COMMAND_RECEIVED = YES;
+				break;
+
+			case TWO:
+				printf("Received %s\n",Commands_ListMedha[TWO]);
+				printf("INVALID_DES_SYS_TYPE\n");
+				SET_BIT_USER(INVALID_DES_SYS_TYPE,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+
+			case THREE:
+				printf("Received %s\n",Commands_ListMedha[THREE]);
+				printf("INVALID_SRC_SYS_TYPE\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(INVALID_SRC_SYS_TYPE,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+
+			case FOUR:
+				printf("Received %s\n",Commands_ListMedha[FOUR]);
+				printf("INVALID_SRC_ADDR\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(INVALID_SRC_ADDR,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+
+			case FIVE:
+				printf("Received %s\n",Commands_ListMedha[FIVE]);
+				printf("INVALID_DES_PORT\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(INVALID_DES_PORT,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+
+			case SIX:
+				printf("Received %s\n",Commands_ListMedha[SIX]);
+				printf("INVALID_SRC_PORT\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(INVALID_SRC_PORT,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+			case SEVEN:
+				printf("Received %s\n",Commands_ListMedha[SEVEN]);
+				printf("INVALID_PACKET_CRC_SIEMENS\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(INVALID_PACKET_CRC_SIEMENS,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+			case EIGHT:
+				printf("Received %s Command\n",Commands_ListMedha[EIGHT]);
+				printf("NO_REPLY_FROM_EIPC\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(NO_REPLY_FROM_EIPC,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+			case NINE:
+				printf("Received %s\n",Commands_ListMedha[NINE]);
+				printf("INVALID_PACKET_CRC_EIPC\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(INVALID_PACKET_CRC_EIPC,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+			case TEN:
+				printf("Received %s\n",Commands_ListMedha[TEN]);
+				printf("INVALID_COMP_PACKET_CRC_SIEMENS\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(INVALID_COMP_PACKET_CRC_SIEMENS,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+			case ELEVEN:
+				printf("Received %s\n",Commands_ListMedha[ELEVEN]);
+				printf("INVALID_COMP_PACKET_CRC_EIPC\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(INVALID_COMP_PACKET_CRC_EIPC,Siemens_fault_injection_st.FAULT_INJECTION_BITS);
+				IS_COMMAND_RECEIVED = YES;
+				break;
+			case TWELVE:
+				printf("Received %s\n",Commands_ListMedha[TWELVE]);
+				printf("CLEAR ALL\n");
+				Siemens_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				IS_COMMAND_RECEIVED = YES;
+				break;
+			default:
+				printf("Please Send Valid Command\n");
+			}
+		}
+
+		if(IS_COMMAND_RECEIVED == YES)
+		{
+			TransmitCanPkt(CAN_FAULT_INJECTION);
+		}
+	}
+}
+
+
+void Update_MedhaCommands(void)
+{
+	uint8_t CmdCnt = 0;
+
+	Commands_ListMedha[CmdCnt][0] = 0X24;
+	Commands_ListMedha[CmdCnt][1] = 0X01;
+	Commands_ListMedha[CmdCnt][2] = 0X30;
+	Commands_ListMedha[CmdCnt][3] = 0X40;
+	Commands_ListMedha[CmdCnt][4] = 0XC0;
+	Commands_ListMedha[CmdCnt][5] = 0X4E;
+	Commands_ListMedha[CmdCnt][6] = 0X26;
+	++CmdCnt;
+
+	strcpy( (char *)Commands_ListMedha[CmdCnt++], (const char *)"DEBUG_MODE");
+	strcpy( (char *)Commands_ListMedha[CmdCnt++], (const char *)"CLEAR_ALL");
+	strcpy( (char *)Commands_ListMedha[CmdCnt++], (const char *)"HELP");
+	Commands_Count =  CmdCnt;
+}
+
+uint8_t Is_MedhaCommand_Valid(uint8_t *Buffer,uint8_t Length)
+{
+	for(uint8_t Traverser = 0; Traverser < Commands_Count; ++Traverser)
+	{
+		//		if(strstr((char *)Buffer,(char *)Commands_ListMedha[Traverser]) != NULL)
+		if(memcmp(Buffer,Commands_ListMedha[Traverser],strlen((char *)Commands_ListMedha[Traverser])) == 0)
+		{
+			return Traverser;
+		}
+	}
+	return 255;
+}
+
+
+#if FAULT_INJECTION_ENABLED
+
+void Get_Command(void)
+{
+	unsigned char ch[10] = {0,},i=0;
+	uint8_t IS_COMMAND_RECEIVED = NO;
+
+	while(Com_DataReady(ISP_PORT))
+	{
+		ch[i] = Com_Get_Byte(ISP_PORT);
+		printf("Received cmd:%c\n",ch[i]);
+		if(ch[i] == 0x0D)
+		{
+			printf("\n_____________________________ COMMAND RECEIVED _____________________________\n");
+			IS_COMMAND_RECEIVED = YES;
+			switch(ch[0])
+			{
+			case 'A':
+			case 'a':
+				printf("Invalid Destination Address Failure\n");
+				SET_BIT_USER(DEST_ADDR_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+
+			case 'B':
+			case 'b':
+				printf("Invalid Source Address Failure\n");
+				SET_BIT_USER(SOURCE_ADDR_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+
+			case 'C':
+			case 'c':
+				printf("Invalid No_of_Relays Failure\n");
+				SET_BIT_USER(NO_OF_RELAYS_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+
+			case 'D':
+			case 'd':
+				printf("Invalid Channel Type Failure\n");
+				SET_BIT_USER(CHANNEL_TYPE_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+
+			case 'E':
+			case 'e':
+				printf("Invalid Control Byte Failure\n");
+				SET_BIT_USER(CONTROL_BYTE_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+
+			case 'F':
+			case 'f':
+				printf("EI_Health-Fail Condition\n");
+				SET_BIT_USER(EI_HEALTH_FAIL_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+
+			case 'G':
+			case 'g':
+				printf("EIPC Reception Failure\n");
+				SET_BIT_USER(EIPC_RX_FAIL_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+
+			case 'H':
+			case 'h':
+				printf("Compliment Relay Status Failure\n");
+				SET_BIT_USER(CMPLMT_FAIL_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+
+			case 'I':
+			case 'i':
+				printf("Vital CRC Failure\n");
+				SET_BIT_USER(VITAL_CRC_FAIL_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+			case 'J':
+			case 'j':
+				printf("Message CRC Failure\n");
+				SET_BIT_USER(MSG_CRC_FAIL_FI,Medha_Fault_Injection_st.FaultBits);
+				break;
+
+			case 'Z':
+			case 'z':
+				printf("Clearing FAULT BITS\n");
+				Medha_Fault_Injection_st.FaultBits = 0;
+				break;
+
+			default:
+				printf("Wrong Command\n");
+				if(Medha_Fault_Injection_st.FaultBits != 0)
+				{
+					printf("Clearing Fault Bits");
+					Medha_Fault_Injection_st.FaultBits = 0;
+				}
+			}
+		}
+		else
+		{
+			i++;
+			if((i+1)>= sizeof(ch))
+			{
+				i=0;
+				printf("Invalid Command\n");
+			}
+		}
+	}
+
+	if(IS_COMMAND_RECEIVED == YES)
+	{
+		TransmitCanPkt(CAN_FAULT_INJECTION);
+	}
+}
+
+#endif
+
+/* __________________________________  CRC FUNCTIONS _______________________________ */
+uint32_t GetCRC32(unsigned short us_Start,uint8_t *ucPtr,unsigned short us_End)
+{
+	uint32_t Crc = 0;
+	uint32_t i = 0;
+	uint32_t LookUpIndex = 0;
+
+	//	printf("\nstart cRc us_Start=%d end =%d\n",us_Start,us_End);
+	for(i = us_Start ;i < us_End;i++)
+	{
+		LookUpIndex = (uint8_t)(Crc ^ ucPtr[i]);
+		Crc = (Crc >> 8);
+		Crc = Crc ^ Crc32_LookUp[LookUpIndex];
+	}
+
+	return Crc;
+}
+
+uint32_t CheckCRC32(uint16_t us_Start, uint8_t *ucPtr,uint16_t us_End)
+{
+	uint32_t Pkt_Crc = 0;
+	uint32_t Cal_Crc = 0;
+
+	Cal_Crc = GetCRC32(us_Start,ucPtr,us_End);
+	memcpy(&Pkt_Crc,&ucPtr[us_End],4);
+
+
+#if FAULT_INJECTION_ENABLED
+
+	if(CHECKFLAG(MSG_CRC_FAIL_FI,Medha_Fault_Injection_st.FaultBits)==SET)
+	{
+		uint32_t Temp_Crc = 0;
+		printf("\nActual Received MSG_CRC:0x%08lx\n",Pkt_Crc);
+		Temp_Crc = HAL_RNG_GetRandomNumber(&hrng)%0xffffffff;
+		if( Temp_Crc == Pkt_Crc )
+		{
+			Pkt_Crc =Temp_Crc+10;
+		}
+		else
+		{
+			Pkt_Crc = Temp_Crc;
+		}
+		printf("Injected MSG_CRC:0x%08lx\n",Pkt_Crc);
+	}
+
+#endif
+
+
+	if(Pkt_Crc == Cal_Crc)
+	{
+		return OK;
+	}
+	else
+	{
+		printf("\nReceived CRC:0x%08lx\n",Pkt_Crc);
+		printf("Calculated CRC:0x%08lx\n",Cal_Crc);
+		return NOT_OK;
+	}
+
+}
+/* __________________________________  CRC FUNCTIONS _______________________________ */
+

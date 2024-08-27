@@ -1,0 +1,14 @@
+../Core/Src/Medha.c:71:6:Process_Medha_EI	8	static
+../Core/Src/Medha.c:114:10:Get_Medha_EI_Message	24	static
+../Core/Src/Medha.c:213:6:Medha_EI_Analyser	768	static
+../Core/Src/Medha.c:623:6:Send_Medha_EI_Reply	336	static
+../Core/Src/Medha.c:713:6:Send_Relay_Statuses_2_MIE	16	static
+../Core/Src/Medha.c:742:6:Process_Clear_Relays	16	static
+../Core/Src/Medha.c:804:6:Send_Data_to_Other	8	static
+../Core/Src/Medha.c:869:6:Process_Data_from_Other	16	static
+../Core/Src/Medha.c:1002:6:Print_Medha_Self_Details	8	static
+../Core/Src/Medha.c:1033:6:CheckforMedhaCMD	112	static
+../Core/Src/Medha.c:1166:6:Update_MedhaCommands	16	static
+../Core/Src/Medha.c:1185:9:Is_MedhaCommand_Valid	32	static
+../Core/Src/Medha.c:1310:10:GetCRC32	32	static
+../Core/Src/Medha.c:1327:10:CheckCRC32	24	static

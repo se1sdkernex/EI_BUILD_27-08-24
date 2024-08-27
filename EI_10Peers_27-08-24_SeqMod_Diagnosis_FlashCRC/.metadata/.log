@@ -1,0 +1,21 @@
+!SESSION 2024-08-27 11:13:04.625 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-08-27 11:13:14.340
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-08-27 11:13:14.438
+!MESSAGE Log4j initialized with config file D:\_ei\EI_10Peers_27-08-24_SeqMod_Diagnosis_FlashCRC\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-08-27 11:13:17.684
+!MESSAGE Started RMI Server, listening on port 41338
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-27 11:13:43.683
+!MESSAGE Indexed 'EI_1' (136 sources, 322 headers) in 14.9 sec: 20,168 declarations; 129,870 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-27 11:13:53.028
+!MESSAGE Indexed 'EI_2' (136 sources, 322 headers) in 9.13 sec: 20,157 declarations; 129,672 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)

@@ -1,0 +1,14 @@
+../Core/Src/kyosan.c:27:6:Process_Kyosan_EI	8	static
+../Core/Src/kyosan.c:52:6:Process_ComFailTimeout	8	static
+../Core/Src/kyosan.c:77:6:Process_CheckOtherData	4	static
+../Core/Src/kyosan.c:97:6:SendKyosanRelays2Other	8	static
+../Core/Src/kyosan.c:112:6:DetectCanXchangeFailure	8	static
+../Core/Src/kyosan.c:131:6:Process_Send_Signals_2_MIE_Kyosan	32	static
+../Core/Src/kyosan.c:229:6:Get_Kyosan_EI_Message	56	static
+../Core/Src/kyosan.c:551:10:Calc_Kysoan_CRC	32	static
+../Core/Src/kyosan.c:575:6:Update_KyosanStructure	4	static
+../Core/Src/kyosan.c:587:6:UpdateSIGNALSNamesKyosan	16	static
+../Core/Src/kyosan.c:664:6:PrintSignalsKyosan	16	static
+../Core/Src/kyosan.c:701:6:Check_forKyosanCMD	112	static
+../Core/Src/kyosan.c:803:6:Update_KyosanCommands	32	static
+../Core/Src/kyosan.c:827:9:Is_KyosanCommand_Valid	32	static

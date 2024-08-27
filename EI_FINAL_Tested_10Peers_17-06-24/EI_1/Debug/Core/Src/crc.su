@@ -1,0 +1,11 @@
+../Core/Src/crc.c:33:6:MX_CRC_Init	8	static
+../Core/Src/crc.c:62:6:HAL_CRC_MspInit	24	static
+../Core/Src/crc.c:78:6:HAL_CRC_MspDeInit	16	static
+../Core/Src/crc.c:96:11:CheckCRC	24	static
+../Core/Src/crc.c:125:20:GetCRC16	24	static
+../Core/Src/crc.c:149:20:ComputeCRC	16	static
+../Core/Src/crc.c:164:20:CommCheckCRC	24	static
+../Core/Src/crc.c:184:20:CommGetCRC16	24	static
+../Core/Src/crc.c:216:14:ReverseCRCPolynomial	32	static
+../Core/Src/crc.c:236:14:CalculateDirectReverseCrc	40	static
+../Core/Src/crc.c:270:14:AnsoldoCrc	48	static

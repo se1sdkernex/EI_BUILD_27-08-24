@@ -1,0 +1,29 @@
+11:31:32 **** Incremental Build of configuration Debug for project EI_1 ****
+make -j12 all 
+del_hex.bat
+Current Folder: EI_1
+Deleting EI_1.hex
+ 
+arm-none-eabi-size   EI_1.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 188884	   1260	  91204	 281348	  44b04	EI_1.elf
+Finished building: default.size.stdout
+ 
+copy_hex.bat
+Found .hex file: EI_1.hex
+A subdirectory or file CRC already exists.
+        1 file(s) copied.
+        1 file(s) moved.
+CRC:0XA831
+DataLength:190144
+copyfile:move /Y CRC\Temp.hex CRC\EI_1.hex
+
+A subdirectory or file ..\..\HEX already exists.
+copying hex file to HEX folder
+CRC\EI_1.hex
+        1 file(s) copied.
+Found .hex file: 
+ 
+
+11:31:34 Build Finished. 0 errors, 0 warnings. (took 1s.716ms)
+

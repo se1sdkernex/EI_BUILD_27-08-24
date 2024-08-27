@@ -1,0 +1,4 @@
+E:/__LAPTOP_DATA/To_Sandeep_EI/To_Sandeep_EI/EI_1/Core/Src/gpio.c:44:6:MX_GPIO_Init	104	static
+E:/__LAPTOP_DATA/To_Sandeep_EI/To_Sandeep_EI/EI_1/Core/Src/gpio.c:225:6:Feed_wdt	8	static
+E:/__LAPTOP_DATA/To_Sandeep_EI/To_Sandeep_EI/EI_1/Core/Src/gpio.c:237:6:Blink_S1	8	static
+E:/__LAPTOP_DATA/To_Sandeep_EI/To_Sandeep_EI/EI_1/Core/Src/gpio.c:248:6:Blink_S2	8	static

@@ -1,0 +1,4 @@
+../Core/Src/ReadFlash.c:19:6:find_flash_used_size	24	static
+../Core/Src/ReadFlash.c:37:6:CheckCRConStartup	40	static
+../Core/Src/ReadFlash.c:92:9:CheckCRConRunTime	120	static
+../Core/Src/ReadFlash.c:162:10:crc16_arc	32	static

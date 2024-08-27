@@ -1,0 +1,6 @@
+../Core/Src/Config.c:26:6:Update_HitachiCommands	24	static
+../Core/Src/Config.c:58:1:__io_putchar	16	static
+../Core/Src/Config.c:68:6:Get_Slot	16	static
+../Core/Src/Config.c:83:6:Check_for_cmd	112	static
+../Core/Src/Config.c:318:9:Is_Command_Valid	32	static
+../Core/Src/Config.c:331:6:PrintCmdList	16	static

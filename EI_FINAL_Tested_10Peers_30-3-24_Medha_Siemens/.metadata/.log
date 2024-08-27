@@ -1,0 +1,39 @@
+!SESSION 2024-07-08 14:38:27.480 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-07-08 14:38:55.463
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-07-08 14:39:05.555
+!MESSAGE Log4j initialized with config file E:\__LAPTOP_DATA\_Integrated\EI_FINAL_Tested_10Peers_30-3-24_Medha_Siemens\.metadata\.log4j.xml
+!SESSION 2024-07-08 14:40:27.537 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-07-08 14:40:38.317
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-07-08 14:40:38.382
+!MESSAGE Log4j initialized with config file E:\__LAPTOP_DATA\_Integrated\EI_FINAL_Tested_10Peers_30-3-24_Medha_Siemens\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-07-08 14:40:51.375
+!MESSAGE Started RMI Server, listening on port 41338
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-07-08 14:42:06.319
+!MESSAGE Indexed 'EI_1' (134 sources, 319 headers) in 30.8 sec: 19,878 declarations; 126,516 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-07-08 14:42:12.444
+!MESSAGE Indexed 'EI_2' (134 sources, 319 headers) in 5.97 sec: 19,871 declarations; 126,319 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-07-08 16:31:50.052
+!MESSAGE Indexed 'EI_1' (134 sources, 319 headers) in 8.48 sec: 19,878 declarations; 126,522 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-07-08 16:32:47.706
+!MESSAGE Indexed 'EI_2' (135 sources, 319 headers) in 7.81 sec: 19,892 declarations; 126,629 references; 3 unresolved inclusions; 45 syntax errors; 164 unresolved names (0.11%)

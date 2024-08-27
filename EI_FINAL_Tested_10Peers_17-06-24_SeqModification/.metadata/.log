@@ -1,0 +1,42 @@
+!SESSION 2024-08-26 11:16:18.418 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-08-26 11:17:07.892
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-08-26 11:17:07.956
+!MESSAGE Log4j initialized with config file D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqModification\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-08-26 11:17:11.185
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-26 11:17:48.847
+!MESSAGE Indexed 'EI_1' (135 sources, 320 headers) in 12.9 sec: 20,057 declarations; 128,362 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-26 11:17:54.793
+!MESSAGE Indexed 'EI_2' (135 sources, 320 headers) in 5.86 sec: 20,046 declarations; 128,176 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-26 11:20:35.898
+!MESSAGE Indexed 'EI_1' (135 sources, 320 headers) in 12 sec: 20,057 declarations; 128,362 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-26 17:37:54.001
+!MESSAGE Indexed 'EI_2' (137 sources, 321 headers) in 10.8 sec: 20,477 declarations; 136,716 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.1%)
+!SESSION 2024-08-27 09:32:00.710 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqModification
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-08-27 09:32:04.872
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-08-27 09:32:04.952
+!MESSAGE Log4j initialized with config file D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqModification\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-08-27 09:32:18.787
+!MESSAGE Started RMI Server, listening on port 41337

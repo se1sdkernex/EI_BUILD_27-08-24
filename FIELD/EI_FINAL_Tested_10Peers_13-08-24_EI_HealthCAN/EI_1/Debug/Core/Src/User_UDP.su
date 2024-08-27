@@ -1,0 +1,7 @@
+../Core/Src/User_UDP.c:26:6:udpServer_init	16	static
+../Core/Src/User_UDP.c:108:6:UDP_Receive_Callback	32	static
+../Core/Src/User_UDP.c:208:6:udpClient_connect	16	static
+../Core/Src/User_UDP.c:258:6:udpClient_send	32	static
+../Core/Src/User_UDP.c:294:9:Is_There_EI_Data	4	static
+../Core/Src/User_UDP.c:306:9:Get_Eth_Byte	16	static
+../Core/Src/User_UDP.c:321:6:Udp_Send_SigInfo	32	static

@@ -1,0 +1,335 @@
+/*
+ * User_UDP.c
+ *
+ *  Created on: May 15, 2023
+ *      Author: Ravi Teja P
+ */
+
+#include "Headers.h"
+
+
+ETHERNET_Circle_t	Ethernet_Circle_buff_st;
+
+ip_addr_t remote_ip[MAX_UDP_CONNECTIONS];
+ip_addr_t Source_IP;
+uint16_t des_port[MAX_UDP_CONNECTIONS] = {0,};
+
+//struct udp_pcb *upcb;
+//struct udp_pcb *upcb2;
+//struct udp_pcb *upcb3;
+//struct udp_pcb *upcb4;
+
+struct udp_pcb *upcb;
+
+
+
+void udpServer_init(void)
+{
+
+	ip_addr_t myIPADDR;
+	err_t err = ERR_ABRT;
+
+	upcb = udp_new();
+
+	switch(EI_data.ProtocolType)
+	{
+	case HITACHI:
+		IP_ADDR4(&myIPADDR, EI_data.Hitachi_st.Self_IP[CARD_INDEX][0], EI_data.Hitachi_st.Self_IP[CARD_INDEX][1], EI_data.Hitachi_st.Self_IP[CARD_INDEX][2], EI_data.Hitachi_st.Self_IP[CARD_INDEX][3]);
+		err = udp_bind(upcb, &myIPADDR, EI_data.Hitachi_st.Self_Listening_Port[CARD_INDEX]);  // 7 is the server UDP port
+		if(err == ERR_OK)
+		{
+			//				printf("OK\n");
+			udp_recv(upcb, UDP_Receive_Callback, NULL);
+		}
+		else
+		{
+			printf("N-OK\n");
+			udp_remove(upcb);
+		}
+		break;
+	case SIEMENS:
+		IP_ADDR4(&myIPADDR, EI_data.Siemens_st.Self_IP[CARD_INDEX][0], EI_data.Siemens_st.Self_IP[CARD_INDEX][1], EI_data.Siemens_st.Self_IP[CARD_INDEX][2], EI_data.Siemens_st.Self_IP[CARD_INDEX][3]);
+		err = udp_bind(upcb, &myIPADDR, EI_data.Siemens_st.Self_Listening_Port[CARD_INDEX]);  // 7 is the server UDP port
+		if(err == ERR_OK)
+		{
+			//				printf("OK\n");
+			udp_recv(upcb, UDP_Receive_Callback, NULL);
+		}
+		else
+		{
+			printf("N-OK\n");
+			udp_remove(upcb);
+		}
+		break;
+	default:
+		return;
+	}
+
+	udpClient_connect();
+
+	//	// UDP Control Block structure
+	//
+	//
+	//	/* 1. Create a new UDP control block  */
+	//	upcb = udp_new();
+	//
+	//	/* 2. Bind the upcb to the local port */
+	//	ip_addr_t myIPADDR;
+	//
+	//	switch(EI_data.ProtocolType)
+	//	{
+	//	case HITACHI:
+	//		IP_ADDR4(&myIPADDR, EI_data.Hitachi_st.Self_IP[CARD_INDEX][0], EI_data.Hitachi_st.Self_IP[CARD_INDEX][1], EI_data.Hitachi_st.Self_IP[CARD_INDEX][2], EI_data.Hitachi_st.Self_IP[CARD_INDEX][3]);
+	//		err = udp_bind(upcb, &myIPADDR, EI_data.Hitachi_st.Self_Listening_Port[CARD_INDEX]);  // 7 is the server UDP port
+	//		break;
+	//	case SIEMENS:
+	//		IP_ADDR4(&myIPADDR, EI_data.Siemens_st.Self_IP[CARD_INDEX][0], EI_data.Siemens_st.Self_IP[CARD_INDEX][1], EI_data.Siemens_st.Self_IP[CARD_INDEX][2], EI_data.Siemens_st.Self_IP[CARD_INDEX][3]);
+	//		err = udp_bind(upcb, &myIPADDR, EI_data.Siemens_st.Self_Listening_Port[CARD_INDEX]);  // 7 is the server UDP port
+	//		break;
+	//
+	//	default:
+	//		return;
+	//	}
+	//
+	//	//	/* 3. Set a receive callback for the upcb */
+	//	//	if(err == ERR_OK)
+	//	//	{
+	//	//		printf("OK\n");
+	//	//		udp_recv(upcb, UDP_Receive_Callback, NULL);
+	//	//	}
+	//	//	else
+	//	//	{
+	//	//		printf("N-OK\n");
+	//	//		udp_remove(upcb);
+	//	//	}
+	//	//	udpClient_connect();
+}
+
+void UDP_Receive_Callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+{
+	uint8_t Traverser = 0;
+	uint16_t Length = 0;
+	uint8_t IpMatched = 0;
+
+	//		char *SendingIP = ipaddr_ntoa(addr);
+	//
+	//		printf("\nFROM IP:%s\n",SendingIP);
+
+#define INTR_SOURCE_DETECT 0
+
+#if INTR_SOURCE_DETECT
+	uint16_t Src_adrr = 0;
+	uint8_t Get_src[4] = {0,0},Modified_data[4] = {0,};
+#endif
+
+	Source_IP = *addr;
+	Length = p->len;
+	switch(EI_data.ProtocolType)
+	{
+
+	case HITACHI:
+		for(;Traverser<EI_data.Hitachi_st.No_of_IP_s;++Traverser)
+		{
+			if( (Source_IP.addr) == (remote_ip[Traverser].addr) )
+			{
+				if(IpMatched == 0)
+				{
+					printf("\nFromIP:%s\n",ipaddr_ntoa(addr));
+					IpMatched = 1;
+				}
+				Recv_IP_List[Traverser/2] = *addr;
+				Recv_IP_Index[Traverser/2] = (Traverser%2) + 1;
+				//break;
+			}
+		}
+		if(Traverser>EI_data.Hitachi_st.No_of_IP_s)
+		{
+			pbuf_free(p);
+			printf("\nPacket Rejected-Unknown IP:%s !\nIndex:%u\n",ipaddr_ntoa(addr),Traverser);
+			return;
+		}
+		break;
+	case SIEMENS:
+		for(Traverser = 0;Traverser<EI_data.Siemens_st.No_of_IP_s;++Traverser)
+		{
+			if( (Source_IP.addr) == (remote_ip[Traverser].addr) )
+			{
+				break;
+			}
+		}
+		if(Traverser>EI_data.Siemens_st.No_of_IP_s)
+		{
+			pbuf_free(p);
+			printf("\nPacket Rejected-Unknown IP!\nIndex:%u\n",Traverser);
+			return;
+		}
+		break;
+	default:
+		pbuf_free(p);
+		return;
+	}
+
+	switch(EI_data.ProtocolType)
+	{
+
+	case HITACHI:
+		Interrupt_clock = HAL_GetTick();
+		if( (Ethernet_Circle_buff_st.Write_end + Length ) > ETH_MAX_SIZE)
+		{
+			uint16_t Packets_to_copy_1 = (ETH_MAX_SIZE -Ethernet_Circle_buff_st.Write_end);
+			memcpy(&Ethernet_Circle_buff_st.Ethernet_Buffers[Ethernet_Circle_buff_st.Write_end],(char *)p->payload,Packets_to_copy_1);
+			memcpy(&Ethernet_Circle_buff_st.Ethernet_Buffers[0],&((char *)p->payload)[Packets_to_copy_1],(Length-Packets_to_copy_1));
+			Ethernet_Circle_buff_st.Write_end = (Length-Packets_to_copy_1);
+		}
+		else
+		{
+			memcpy(&Ethernet_Circle_buff_st.Ethernet_Buffers[Ethernet_Circle_buff_st.Write_end],(char *)p->payload,Length);
+			Ethernet_Circle_buff_st.Write_end = (Ethernet_Circle_buff_st.Write_end + Length);
+		}
+		break;
+
+
+	case SIEMENS:
+		memcpy(&Ethernet_Circle_buff_st.Ethernet_Buffers,(char *)p->payload,Length);
+		Ethernet_Circle_buff_st.Write_end = Length;
+		break;
+
+	default:
+		/* Do Nothing */
+		break;
+	}
+
+
+	pbuf_free(p);
+}
+void udpClient_connect(void)
+{
+//	err_t err;
+	uint8_t Traverser = 0;
+
+	switch(EI_data.ProtocolType)
+	{
+
+	case HITACHI:
+		for(Traverser = 0;Traverser<EI_data.Hitachi_st.No_of_IP_s;++Traverser)
+		{
+			IP_ADDR4(&remote_ip[Traverser], EI_data.Hitachi_st.Source_IP[CARD_INDEX][Traverser][0], EI_data.Hitachi_st.Source_IP[CARD_INDEX][Traverser][1], EI_data.Hitachi_st.Source_IP[CARD_INDEX][Traverser][2], EI_data.Hitachi_st.Source_IP[CARD_INDEX][Traverser][3]);
+			des_port[Traverser] = EI_data.Hitachi_st.PORTS[CARD_INDEX][Traverser][RX_PORT];
+			//			if(Traverser <9)
+			//			{
+			//				upcb2 = udp_new();
+			//				err = udp_connect(upcb2, &remote_ip[Traverser], des_port[Traverser]);
+			//
+			//			}
+			//			else
+			//			{
+			//				printf("2ND:%u\n",Traverser);
+			//				upcb = udp_new();
+			//				err = udp_connect(upcb, &remote_ip[Traverser], des_port[Traverser]);
+			//			}
+			//			if(err != ERR_OK)
+			//			{
+			//				printf("UDP Connection Fail:%u---:%d\n",Traverser,err);
+			//			}
+		}
+		break;
+
+	case SIEMENS:
+		for(Traverser = 0;Traverser<EI_data.Siemens_st.No_of_IP_s;++Traverser)
+		{
+			IP_ADDR4(&remote_ip[Traverser], EI_data.Siemens_st.Source_IP[CARD_INDEX][Traverser][0], EI_data.Siemens_st.Source_IP[CARD_INDEX][Traverser][1], EI_data.Siemens_st.Source_IP[CARD_INDEX][Traverser][2], EI_data.Siemens_st.Source_IP[CARD_INDEX][Traverser][3]);
+			des_port[Traverser] = EI_data.Siemens_st.PORTS[CARD_INDEX][Traverser][RX_PORT];
+			//			upcb = udp_new();
+			//			err = udp_connect(upcb, &remote_ip[Traverser], des_port[Traverser]);
+			//			if(err != ERR_OK)
+			//			{
+			//				printf("UDP Connection Fail:%u\n",Traverser);
+			//			}
+		}
+		break;
+
+	default:
+		return;
+	}
+}
+void udpClient_send(uint8_t *data,uint8_t len,const ip_addr_t IP_addr)
+{
+	struct pbuf *txBuf;
+	err_t udp_sendto_error = 0;
+	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
+
+	//	char *SendingIP = ipaddr_ntoa(&IP_addr);
+	//
+	//	printf("\nSent IP:%s\n",SendingIP);
+
+	if (txBuf != NULL)
+	{
+		pbuf_take(txBuf, data, len);
+		udp_sendto_error = udp_sendto(upcb, txBuf, &IP_addr,des_port[0]);
+		if(udp_sendto_error != ERR_OK)
+		{
+			printf("Packet Sending Failed:%d\nTrying again\n",udp_sendto_error);
+		}
+		else
+		{
+			//printf("\n------------------------------------Differnece :%lu\n",HAL_Elaps_Ticks(Interrupt_clock));
+		}
+		//		for(uint8_t i =0;i<EI_data.No_of_IP_s;++i)
+		//		{
+		//			if( (IP_addr.addr) == (remote_ip[i].addr) )
+		//			{
+		//				udp_sendto(upcb, txBuf, &remote_ip[i],des_port[i]);
+		//				printf("\n------------------------------------Differnece :%lu\n",HAL_Elaps_Ticks(Interrupt_clock));
+		//				printf("Packet Sent Success\n");
+		//				break;
+		//			}
+		//		}
+		pbuf_free(txBuf);
+	}
+}
+
+uint8_t Is_There_EI_Data(void)
+{
+	if(Ethernet_Circle_buff_st.Read_end != Ethernet_Circle_buff_st.Write_end)
+	{
+		return AVAILABLE;
+	}
+	else
+	{
+		return NOT_AVAILABLE;
+	}
+}
+
+uint8_t Get_Eth_Byte(void)
+{
+	uint8_t Data = Ethernet_Circle_buff_st.Ethernet_Buffers[Ethernet_Circle_buff_st.Read_end++];
+	if(Ethernet_Circle_buff_st.Read_end >= ETH_MAX_SIZE)
+	{
+		Ethernet_Circle_buff_st.Read_end = 0;
+		if(Ethernet_Circle_buff_st.Write_end == ETH_MAX_SIZE)
+		{
+			memset(Ethernet_Circle_buff_st.Ethernet_Buffers,0,ETH_MAX_SIZE);
+			Ethernet_Circle_buff_st.Write_end = 0;
+		}
+	}
+	return Data;
+}
+
+void Udp_Send_SigInfo(uint8_t *data,uint8_t len,const ip_addr_t IP_addr)
+{
+	struct pbuf *txBuf;
+	err_t udp_sendto_error = 0;
+	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
+
+	if (txBuf != NULL)
+	{
+		pbuf_take(txBuf, data, len);
+		udp_sendto_error = udp_sendto(upcb, txBuf, &IP_addr,12345);
+		if(udp_sendto_error != ERR_OK)
+		{
+			printf("Packet Sent Failure\n");
+		}
+		pbuf_free(txBuf);
+	}
+}
+

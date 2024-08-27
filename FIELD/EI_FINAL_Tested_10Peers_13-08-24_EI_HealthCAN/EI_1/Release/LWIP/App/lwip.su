@@ -1,0 +1,3 @@
+../LWIP/App/lwip.c:211:13:ethernet_link_status_updated	0	static
+../LWIP/App/lwip.c:60:6:MX_LWIP_Init	32	static
+../LWIP/App/lwip.c:189:6:MX_LWIP_Process	8	static

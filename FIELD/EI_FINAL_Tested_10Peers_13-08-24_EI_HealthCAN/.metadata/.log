@@ -1,0 +1,820 @@
+!SESSION 2024-08-13 10:52:51.626 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-08-13 10:53:00.544
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-08-13 10:53:00.630
+!MESSAGE Log4j initialized with config file D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-08-13 10:53:04.092
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-13 10:53:31.320
+!MESSAGE Indexed 'EI_1' (134 sources, 319 headers) in 13.3 sec: 19,876 declarations; 126,415 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-13 10:53:37.477
+!MESSAGE Indexed 'EI_2' (134 sources, 319 headers) in 5.93 sec: 19,869 declarations; 126,218 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-13 14:44:51.892
+!MESSAGE Indexed 'EI_1' (134 sources, 319 headers) in 10.2 sec: 19,895 declarations; 126,526 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-13 14:45:16.844
+!MESSAGE Indexed 'EI_2' (134 sources, 319 headers) in 11.2 sec: 19,887 declarations; 126,312 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.435
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\api\api_lib.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/api/api_lib.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.437
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\api\api_msg.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/api/api_msg.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.438
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\api\err.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/api/err.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.439
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\api\if_api.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/api/if_api.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.441
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\api\netbuf.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/api/netbuf.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.442
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\api\netdb.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/api/netdb.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.443
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\api\netifapi.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/api/netifapi.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.444
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\api\sockets.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/api/sockets.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.446
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\api\tcpip.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/api/tcpip.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.447
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\apps\mqtt\mqtt.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.448
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\altcp.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/altcp.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.448
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\altcp_alloc.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/altcp_alloc.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.449
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\altcp_tcp.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/altcp_tcp.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.450
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\def.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/def.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.451
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\dns.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/dns.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.452
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\inet_chksum.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/inet_chksum.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.452
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\init.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/init.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.453
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\ip.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/ip.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.453
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\ipv4\icmp.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/ipv4/icmp.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.454
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\ipv4\igmp.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/ipv4/igmp.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.455
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/ipv4/ip4.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.470
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4_addr.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/ipv4/ip4_addr.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.472
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4_frag.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/ipv4/ip4_frag.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.473
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\mem.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/mem.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.473
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\memp.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/memp.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.474
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\netif.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/netif.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.476
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\pbuf.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/pbuf.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.477
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\raw.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/raw.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.478
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\stats.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/stats.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.480
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\sys.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/sys.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.481
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\tcp.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/tcp.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.482
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\tcp_in.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/tcp_in.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.484
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\tcp_out.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/tcp_out.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.485
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\timeouts.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/timeouts.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-13 14:48:14.486
+!MESSAGE Failed to parse stack usage file: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\Middlewares\Third_Party\LwIP\src\core\udp.su
+!STACK 0
+java.io.IOException: Failed to get IFile contents for L/EI_2/Release/Middlewares/Third_Party/LwIP/src/core/udp.su
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:65)
+	at com.st.stm32cube.ide.common.utils.files.FileHelper.readLinesWorkspaceFile(FileHelper.java:40)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.model.StackUsageParser.parseFile(StackUsageParser.java:114)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$5(StackAnalyzerView.java:841)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:841)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$14(StackAnalyzerView.java:1212)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+!SESSION 2024-08-14 11:18:12.863 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-08-14 11:18:25.951
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-08-14 11:18:26.039
+!MESSAGE Log4j initialized with config file D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-08-14 11:18:40.386
+!MESSAGE Started RMI Server, listening on port 41338
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2024-08-14 11:19:13.173
+!MESSAGE Connection to https://sw-center.st.com/stm32cubeide/openstlinux/updatesite1/p2.index failed on No such host is known (sw-center.st.com). Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: No such host is known (sw-center.st.com)
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:929)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1519)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:848)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1368)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1302)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:43)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:118)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:396)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:158)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:168)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:136)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:175)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:96)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:133)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:115)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:75)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1009)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer.access$0(HttpClientRetrieveFileTransfer.java:1001)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer$1.performFileTransfer(HttpClientRetrieveFileTransfer.java:997)
+	at org.eclipse.ecf.filetransfer.FileTransferJob.run(FileTransferJob.java:76)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 4 1006 2024-08-14 11:19:13.431
+!MESSAGE Unknown Host: https://sw-center.st.com/stm32cubeide/openstlinux/updatesite1/compositeContent.xml
+!STACK 0
+java.net.UnknownHostException: sw-center.st.com
+	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1368)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1302)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:43)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:118)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:396)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:158)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:168)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:136)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:175)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:96)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:133)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:115)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:75)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:251)
+	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:71)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2024-08-14 11:19:13.434
+!MESSAGE Connection to https://download.eclipse.org/releases/2022-03/p2.index failed on No such host is known (download.eclipse.org). Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: No such host is known (download.eclipse.org)
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:929)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1519)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:848)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1368)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1302)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:43)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:118)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:396)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:158)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:168)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:136)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:175)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:96)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:133)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:115)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:75)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1009)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer.access$0(HttpClientRetrieveFileTransfer.java:1001)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer$1.performFileTransfer(HttpClientRetrieveFileTransfer.java:997)
+	at org.eclipse.ecf.filetransfer.FileTransferJob.run(FileTransferJob.java:76)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 4 1006 2024-08-14 11:19:13.658
+!MESSAGE Unknown Host: https://download.eclipse.org/releases/2022-03/compositeContent.xml
+!STACK 0
+java.net.UnknownHostException: download.eclipse.org
+	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1368)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1302)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:43)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:118)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:396)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:158)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:168)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:136)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:175)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:96)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:133)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:115)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:75)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:251)
+	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:71)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2024-08-14 11:19:13.664
+!MESSAGE Connection to https://sw-center.st.com/stm32cubeide/updatesite1/p2.index failed on sw-center.st.com. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: sw-center.st.com
+	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1368)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1302)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:43)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:118)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:396)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:158)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:168)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:136)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:175)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:96)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:133)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:115)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:75)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1009)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer.access$0(HttpClientRetrieveFileTransfer.java:1001)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer$1.performFileTransfer(HttpClientRetrieveFileTransfer.java:997)
+	at org.eclipse.ecf.filetransfer.FileTransferJob.run(FileTransferJob.java:76)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 4 1006 2024-08-14 11:19:13.885
+!MESSAGE Unknown Host: https://sw-center.st.com/stm32cubeide/updatesite1/compositeContent.xml
+!STACK 0
+java.net.UnknownHostException: sw-center.st.com
+	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1368)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1302)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:43)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:118)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:396)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:158)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:168)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:136)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:175)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:96)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:133)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:115)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:75)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:251)
+	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:71)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2024-08-14 11:19:13.893
+!MESSAGE Connection to https://download.eclipse.org/tools/cdt/releases/latest/p2.index failed on download.eclipse.org. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: download.eclipse.org
+	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1368)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1302)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:43)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:118)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:396)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:158)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:168)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:136)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:175)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:96)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:133)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:115)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:75)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1009)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer.access$0(HttpClientRetrieveFileTransfer.java:1001)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientRetrieveFileTransfer$1.performFileTransfer(HttpClientRetrieveFileTransfer.java:997)
+	at org.eclipse.ecf.filetransfer.FileTransferJob.run(FileTransferJob.java:76)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 4 1006 2024-08-14 11:19:14.108
+!MESSAGE Unknown Host: https://download.eclipse.org/tools/cdt/releases/latest/compositeContent.xml
+!STACK 0
+java.net.UnknownHostException: download.eclipse.org
+	at java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1509)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1368)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1302)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:43)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:118)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:396)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:158)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:168)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:136)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:175)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:96)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:133)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement$1.proceed(ExecChainElement.java:57)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:115)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:75)
+	at org.eclipse.ecf.provider.filetransfer.httpclient5.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:251)
+	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:71)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.st.stm32cube.ide.mcu.stackanalyzer 4 0 2024-08-14 14:48:43.893
+!MESSAGE Stackanalyzer failed to analyze input
+!STACK 0
+java.lang.Exception: File: D:\_ei\FIELD\EI_FINAL_Tested_10Peers_13-08-24_EI_HealthCAN\EI_2\Release\EI_2.elfdo not exists
+	at com.st.stm32cube.ide.mcu.utils.assembly.Disassembler.<init>(Disassembler.java:56)
+	at com.st.stm32cube.ide.mcu.utils.assembly.Disassembler.<init>(Disassembler.java:84)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.inputChanged(StackAnalyzerView.java:915)
+	at com.st.stm32cube.ide.mcu.stackanalyzer.ui.StackAnalyzerView.lambda$15(StackAnalyzerView.java:1257)
+	at java.base/java.lang.Thread.run(Thread.java:829)

@@ -1,0 +1,4 @@
+E:/__LAPTOP_DATA/_Integrated/EI_FINAL_Tested_10Peers_30-3-24_Medha_Siemens_Vali/EI_1/Core/Src/main.c:243:6:SystemClock_Config	88	static,ignoring_inline_asm
+E:/__LAPTOP_DATA/_Integrated/EI_FINAL_Tested_10Peers_30-3-24_Medha_Siemens_Vali/EI_1/Core/Src/main.c:287:6:Get_Build_Details	72	static
+E:/__LAPTOP_DATA/_Integrated/EI_FINAL_Tested_10Peers_30-3-24_Medha_Siemens_Vali/EI_1/Core/Src/main.c:75:5:main	40	static,ignoring_inline_asm
+E:/__LAPTOP_DATA/_Integrated/EI_FINAL_Tested_10Peers_30-3-24_Medha_Siemens_Vali/EI_1/Core/Src/main.c:335:6:Error_Handler	0	static,ignoring_inline_asm

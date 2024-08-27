@@ -1,0 +1,6 @@
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24/EI_1/Core/Src/Config.c:25:6:Update_HitachiCommands	8	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24/EI_1/Core/Src/Config.c:57:1:__io_putchar	16	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24/EI_1/Core/Src/Config.c:67:6:Get_Slot	8	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24/EI_1/Core/Src/Config.c:317:9:Is_Command_Valid	24	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24/EI_1/Core/Src/Config.c:82:6:Check_for_cmd	120	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24/EI_1/Core/Src/Config.c:330:6:PrintCmdList	24	static

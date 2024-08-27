@@ -1,0 +1,35 @@
+12:25:25 **** Incremental Build of configuration Release for project EI_2 ****
+make -j12 all 
+del_hex.bat
+Current Folder: EI_2
+Deleting EI_2.hex
+ 
+arm-none-eabi-gcc "D:/_ei/FIELD/EI_FINAL_Tested_10Peers_30-3-24_Prints/EI_1/LWIP/Target/ethernetif.c" -mcpu=cortex-m7 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F769xx -DSTM_32=1 -DEI_2=1 -c -I../../EI_1/Core/Inc -I../../EI_1/LWIP/App -I../../EI_1/LWIP/Target -I../../EI_1/Middlewares/Third_Party/LwIP/src/include -I../../EI_1/Middlewares/Third_Party/LwIP/system -I../../EI_1/Drivers/STM32F7xx_HAL_Driver/Inc -I../../EI_1/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../../EI_1/Drivers/BSP/Components/dp83848 -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../EI_1/Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/lwip -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/netif -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../EI_1/Middlewares/Third_Party/LwIP/system/arch -I../../EI_1/Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"LWIP/Target/ethernetif.d" -MT"LWIP/Target/ethernetif.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "LWIP/Target/ethernetif.o"
+arm-none-eabi-gcc "D:/_ei/FIELD/EI_FINAL_Tested_10Peers_30-3-24_Prints/EI_1/Core/Src/User_UDP.c" -mcpu=cortex-m7 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F769xx -DSTM_32=1 -DEI_2=1 -c -I../../EI_1/Core/Inc -I../../EI_1/LWIP/App -I../../EI_1/LWIP/Target -I../../EI_1/Middlewares/Third_Party/LwIP/src/include -I../../EI_1/Middlewares/Third_Party/LwIP/system -I../../EI_1/Drivers/STM32F7xx_HAL_Driver/Inc -I../../EI_1/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../../EI_1/Drivers/BSP/Components/dp83848 -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/netif/ppp -I../../EI_1/Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/lwip -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/lwip/apps -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/lwip/priv -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/lwip/prot -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/netif -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/posix -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I../../EI_1/Middlewares/Third_Party/LwIP/src/include/compat/stdc -I../../EI_1/Middlewares/Third_Party/LwIP/system/arch -I../../EI_1/Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/User_UDP.d" -MT"Core/Src/User_UDP.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/User_UDP.o"
+D:/_ei/FIELD/EI_FINAL_Tested_10Peers_30-3-24_Prints/EI_1/Core/Src/User_UDP.c: In function 'udpClient_connect':
+D:/_ei/FIELD/EI_FINAL_Tested_10Peers_30-3-24_Prints/EI_1/Core/Src/User_UDP.c:213:8: warning: unused variable 'err' [-Wunused-variable]
+  213 |  err_t err;
+      |        ^~~
+arm-none-eabi-gcc -o "EI_2.elf" @"objects.list"   -mcpu=cortex-m7 -T"D:\_ei\FIELD\EI_FINAL_Tested_10Peers_30-3-24_Prints\EI_2\STM32F769BITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="EI_2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: EI_2.elf
+ 
+arm-none-eabi-size   EI_2.elf 
+arm-none-eabi-objdump -h -S  EI_2.elf  > "EI_2.list"
+arm-none-eabi-objcopy  -O ihex  EI_2.elf  "EI_2.hex"
+   text	   data	    bss	    dec	    hex	filename
+  96496	    480	  83344	 180320	  2c060	EI_2.elf
+Finished building: default.size.stdout
+ 
+Finished building: EI_2.hex
+ 
+Finished building: EI_2.list
+ 
+copy_hex.bat
+A subdirectory or file ..\..\HEX already exists.
+copying hex file to HEX folder
+EI_2.hex
+        1 file(s) copied.
+ 
+
+12:25:26 Build Finished. 0 errors, 1 warnings. (took 1s.667ms)
+

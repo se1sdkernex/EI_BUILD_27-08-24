@@ -1,0 +1,13 @@
+../Core/Src/spi.c:46:6:MX_SPI1_Init	8	static
+../Core/Src/spi.c:80:6:HAL_SPI_MspInit	64	static
+../Core/Src/spi.c:127:6:HAL_SPI_MspDeInit	8	static
+../Core/Src/spi.c:188:10:SPI_WriteInFlash	32	static
+../Core/Src/spi.c:158:6:saveToFlash	8	static
+../Core/Src/spi.c:293:5:SPI_MemoryEraseBySector	24	static
+../Core/Src/spi.c:411:6:SPI_ReadFromFlash	24	static
+../Core/Src/spi.c:384:6:readFromFlash	4	static
+../Core/Src/spi.c:989:15:saveConfig	24	static,ignoring_inline_asm
+../Core/Src/spi.c:939:6:AutoLoadDat	32	static
+../Core/Src/spi.c:923:6:Data_Processing	8	static
+../Core/Src/spi.c:466:6:Get_Config	16	static
+../Core/Src/spi.c:1035:6:Print_BuildDat_Details	8	static
