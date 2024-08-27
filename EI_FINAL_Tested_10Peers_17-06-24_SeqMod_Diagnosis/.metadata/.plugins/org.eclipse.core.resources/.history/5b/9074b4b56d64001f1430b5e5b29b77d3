@@ -403,7 +403,7 @@ void process_to_comReceived(void)
 	unsigned int NoofBuffBytes = 0,Dat_Check;
 	//	static unsigned int ui_riucmdTxTics;
 	static unsigned char EI_Buffer[300];
-	NoofBuffBytes= CommReadAndFormMessage_Cmd(TWO_PORT,EI_Buffer,sizeof(EI_Buffer));
+	NoofBuffBytes= CommReadAndFormMessage_Cmd(ONE_PORT,EI_Buffer,sizeof(EI_Buffer));
 
 	if(NoofBuffBytes >0)
 	{

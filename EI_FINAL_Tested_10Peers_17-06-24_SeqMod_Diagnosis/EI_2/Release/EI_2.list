@@ -1232,7 +1232,7 @@ Disassembly of section .text:
  8000e58:	b570      	push	{r4, r5, r6, lr}
  8000e5a:	4d22      	ldr	r5, [pc, #136]	; (8000ee4 <process_to_comReceived+0x8c>)
  8000e5c:	f44f 7296 	mov.w	r2, #300	; 0x12c
- 8000e60:	2001      	movs	r0, #1
+ 8000e60:	2002      	movs	r0, #2
  8000e62:	4629      	mov	r1, r5
  8000e64:	f7ff ff76 	bl	8000d54 <CommReadAndFormMessage_Cmd>
  8000e68:	2800      	cmp	r0, #0
@@ -16599,7 +16599,7 @@ Disassembly of section .text:
  800b742:	b16b      	cbz	r3, 800b760 <main+0x15c>
  800b744:	f8d4 3214 	ldr.w	r3, [r4, #532]	; 0x214
  800b748:	b153      	cbz	r3, 800b760 <main+0x15c>
- 800b74a:	f000 fd75 	bl	800c238 <MX_UART5_Init>
+ 800b74a:	f000 fd75 	bl	800c238 <MX_UART7_Init>
  800b74e:	f8d4 1214 	ldr.w	r1, [r4, #532]	; 0x214
  800b752:	4834      	ldr	r0, [pc, #208]	; (800b824 <main+0x220>)
  800b754:	f008 fa82 	bl	8013c5c <iprintf>
@@ -17727,11 +17727,11 @@ Disassembly of section .text:
  800c232:	4770      	bx	lr
  800c234:	e000ed00 	.word	0xe000ed00
 
-0800c238 <MX_UART5_Init>:
+0800c238 <MX_UART7_Init>:
  800c238:	b508      	push	{r3, lr}
- 800c23a:	480e      	ldr	r0, [pc, #56]	; (800c274 <MX_UART5_Init+0x3c>)
+ 800c23a:	480e      	ldr	r0, [pc, #56]	; (800c274 <MX_UART7_Init+0x3c>)
  800c23c:	f44f 5316 	mov.w	r3, #9600	; 0x2580
- 800c240:	4a0d      	ldr	r2, [pc, #52]	; (800c278 <MX_UART5_Init+0x40>)
+ 800c240:	4a0d      	ldr	r2, [pc, #52]	; (800c278 <MX_UART7_Init+0x40>)
  800c242:	e9c0 2300 	strd	r2, r3, [r0]
  800c246:	2300      	movs	r3, #0
  800c248:	220c      	movs	r2, #12
@@ -17741,17 +17741,17 @@ Disassembly of section .text:
  800c252:	e9c0 2305 	strd	r2, r3, [r0, #20]
  800c256:	e9c0 3307 	strd	r3, r3, [r0, #28]
  800c25a:	f004 fa71 	bl	8010740 <HAL_UART_Init>
- 800c25e:	b108      	cbz	r0, 800c264 <MX_UART5_Init+0x2c>
+ 800c25e:	b108      	cbz	r0, 800c264 <MX_UART7_Init+0x2c>
  800c260:	f7ff faec 	bl	800b83c <Error_Handler>
  800c264:	2280      	movs	r2, #128	; 0x80
- 800c266:	4905      	ldr	r1, [pc, #20]	; (800c27c <MX_UART5_Init+0x44>)
- 800c268:	4802      	ldr	r0, [pc, #8]	; (800c274 <MX_UART5_Init+0x3c>)
+ 800c266:	4905      	ldr	r1, [pc, #20]	; (800c27c <MX_UART7_Init+0x44>)
+ 800c268:	4802      	ldr	r0, [pc, #8]	; (800c274 <MX_UART7_Init+0x3c>)
  800c26a:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
  800c26e:	f004 bb01 	b.w	8010874 <HAL_UARTEx_ReceiveToIdle_IT>
  800c272:	bf00      	nop
- 800c274:	2000da10 	.word	0x2000da10
- 800c278:	40005000 	.word	0x40005000
- 800c27c:	2000c70c 	.word	0x2000c70c
+ 800c274:	2000dac8 	.word	0x2000dac8
+ 800c278:	40007800 	.word	0x40007800
+ 800c27c:	2000c78c 	.word	0x2000c78c
 
 0800c280 <MX_USART1_UART_Init>:
  800c280:	b508      	push	{r3, lr}

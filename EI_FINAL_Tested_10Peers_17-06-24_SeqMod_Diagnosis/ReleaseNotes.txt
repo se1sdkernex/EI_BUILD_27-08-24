@@ -1,7 +1,7 @@
 /********************************************************************************/
 Build Date:Mar 30 2024
 Build Time:12:05:37
-Build Name:EI_PROTOCOL_CONVERTER_VERSION:2.0.3
+Build Name:EI_PROTOCOL_CONVERTER_VERSION:2.5
 
 EIPC_1:EXECUTIVE_CRC:0X77BA
 EIPC_2:EXECUTIVE_CRC:0X4538
@@ -10,3 +10,4 @@ EIPC_2:EXECUTIVE_CRC:0X4538
 1. Tested For 10 Peers
 2. For Internal Lab Testing, Please Set the Station Name as "LAB_TESTING" for ignoring few of Cases, for smooth Simulation in LAB.
 3. For Debugging use "DEBUG_MODE1" Command from DOCKLIGHT.
+https://github.com/se1sdkernex/EI_BUILD_27-08-24.git

@@ -2398,10 +2398,10 @@ void process_to_comReceived(void)
  80012f8:	607b      	str	r3, [r7, #4]
 	//	static unsigned int ui_riucmdTxTics;
 	static unsigned char EI_Buffer[300];
-	NoofBuffBytes= CommReadAndFormMessage_Cmd(ONE_PORT,EI_Buffer,sizeof(EI_Buffer));
+	NoofBuffBytes= CommReadAndFormMessage_Cmd(TWO_PORT,EI_Buffer,sizeof(EI_Buffer));
  80012fa:	f44f 7296 	mov.w	r2, #300	; 0x12c
  80012fe:	492f      	ldr	r1, [pc, #188]	; (80013bc <process_to_comReceived+0xcc>)
- 8001300:	2001      	movs	r0, #1
+ 8001300:	2002      	movs	r0, #2
  8001302:	f000 f86b 	bl	80013dc <CommReadAndFormMessage_Cmd>
  8001306:	4603      	mov	r3, r0
  8001308:	607b      	str	r3, [r7, #4]
@@ -49062,8 +49062,8 @@ int main(void)
  8017b36:	2b00      	cmp	r3, #0
  8017b38:	d049      	beq.n	8017bce <main+0x16a>
 		{
-			MX_UART5_Init();
- 8017b3a:	f001 f8f7 	bl	8018d2c <MX_UART5_Init>
+			MX_UART7_Init();
+ 8017b3a:	f001 f8f7 	bl	8018d2c <MX_UART7_Init>
 			printf("Initializing UART with BaudRate:%lu\n",EI_data.Hitachi_st.BaudRate);
  8017b3e:	4b3c      	ldr	r3, [pc, #240]	; (8017c30 <main+0x1cc>)
  8017b40:	f8d3 3214 	ldr.w	r3, [r3, #532]	; 0x214
@@ -52231,88 +52231,86 @@ void SystemInit(void)
  8018d26:	bf00      	nop
  8018d28:	e000ed00 	.word	0xe000ed00
 
-08018d2c <MX_UART5_Init>:
-  /* USER CODE END UART4_Init 2 */
+08018d2c <MX_UART7_Init>:
+  /* USER CODE END UART5_Init 2 */
 
 }
-/* UART5 init function */
-void MX_UART5_Init(void)
+/* UART7 init function */
+void MX_UART7_Init(void)
 {
  8018d2c:	b580      	push	{r7, lr}
  8018d2e:	af00      	add	r7, sp, #0
-  /* USER CODE END UART5_Init 0 */
+  /* USER CODE END UART7_Init 0 */
 
-  /* USER CODE BEGIN UART5_Init 1 */
+  /* USER CODE BEGIN UART7_Init 1 */
 
-  /* USER CODE END UART5_Init 1 */
-  huart5.Instance = UART5;
- 8018d30:	4b16      	ldr	r3, [pc, #88]	; (8018d8c <MX_UART5_Init+0x60>)
- 8018d32:	4a17      	ldr	r2, [pc, #92]	; (8018d90 <MX_UART5_Init+0x64>)
+  /* USER CODE END UART7_Init 1 */
+  huart7.Instance = UART7;
+ 8018d30:	4b16      	ldr	r3, [pc, #88]	; (8018d8c <MX_UART7_Init+0x60>)
+ 8018d32:	4a17      	ldr	r2, [pc, #92]	; (8018d90 <MX_UART7_Init+0x64>)
  8018d34:	601a      	str	r2, [r3, #0]
-  huart5.Init.BaudRate = 9600;
- 8018d36:	4b15      	ldr	r3, [pc, #84]	; (8018d8c <MX_UART5_Init+0x60>)
+  huart7.Init.BaudRate = 9600;
+ 8018d36:	4b15      	ldr	r3, [pc, #84]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d38:	f44f 5216 	mov.w	r2, #9600	; 0x2580
  8018d3c:	605a      	str	r2, [r3, #4]
-  huart5.Init.WordLength = UART_WORDLENGTH_8B;
- 8018d3e:	4b13      	ldr	r3, [pc, #76]	; (8018d8c <MX_UART5_Init+0x60>)
+  huart7.Init.WordLength = UART_WORDLENGTH_8B;
+ 8018d3e:	4b13      	ldr	r3, [pc, #76]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d40:	2200      	movs	r2, #0
  8018d42:	609a      	str	r2, [r3, #8]
-  huart5.Init.StopBits = UART_STOPBITS_1;
- 8018d44:	4b11      	ldr	r3, [pc, #68]	; (8018d8c <MX_UART5_Init+0x60>)
+  huart7.Init.StopBits = UART_STOPBITS_1;
+ 8018d44:	4b11      	ldr	r3, [pc, #68]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d46:	2200      	movs	r2, #0
  8018d48:	60da      	str	r2, [r3, #12]
-  huart5.Init.Parity = UART_PARITY_NONE;
- 8018d4a:	4b10      	ldr	r3, [pc, #64]	; (8018d8c <MX_UART5_Init+0x60>)
+  huart7.Init.Parity = UART_PARITY_NONE;
+ 8018d4a:	4b10      	ldr	r3, [pc, #64]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d4c:	2200      	movs	r2, #0
  8018d4e:	611a      	str	r2, [r3, #16]
-  huart5.Init.Mode = UART_MODE_TX_RX;
- 8018d50:	4b0e      	ldr	r3, [pc, #56]	; (8018d8c <MX_UART5_Init+0x60>)
+  huart7.Init.Mode = UART_MODE_TX_RX;
+ 8018d50:	4b0e      	ldr	r3, [pc, #56]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d52:	220c      	movs	r2, #12
  8018d54:	615a      	str	r2, [r3, #20]
-  huart5.Init.HwFlowCtl = UART_HWCONTROL_NONE;
- 8018d56:	4b0d      	ldr	r3, [pc, #52]	; (8018d8c <MX_UART5_Init+0x60>)
+  huart7.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 8018d56:	4b0d      	ldr	r3, [pc, #52]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d58:	2200      	movs	r2, #0
  8018d5a:	619a      	str	r2, [r3, #24]
-  huart5.Init.OverSampling = UART_OVERSAMPLING_16;
- 8018d5c:	4b0b      	ldr	r3, [pc, #44]	; (8018d8c <MX_UART5_Init+0x60>)
+  huart7.Init.OverSampling = UART_OVERSAMPLING_16;
+ 8018d5c:	4b0b      	ldr	r3, [pc, #44]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d5e:	2200      	movs	r2, #0
  8018d60:	61da      	str	r2, [r3, #28]
-  huart5.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
- 8018d62:	4b0a      	ldr	r3, [pc, #40]	; (8018d8c <MX_UART5_Init+0x60>)
+  huart7.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+ 8018d62:	4b0a      	ldr	r3, [pc, #40]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d64:	2200      	movs	r2, #0
  8018d66:	621a      	str	r2, [r3, #32]
-  huart5.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
- 8018d68:	4b08      	ldr	r3, [pc, #32]	; (8018d8c <MX_UART5_Init+0x60>)
+  huart7.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+ 8018d68:	4b08      	ldr	r3, [pc, #32]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d6a:	2200      	movs	r2, #0
  8018d6c:	625a      	str	r2, [r3, #36]	; 0x24
-  if (HAL_UART_Init(&huart5) != HAL_OK)
- 8018d6e:	4807      	ldr	r0, [pc, #28]	; (8018d8c <MX_UART5_Init+0x60>)
+  if (HAL_UART_Init(&huart7) != HAL_OK)
+ 8018d6e:	4807      	ldr	r0, [pc, #28]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d70:	f006 fbc8 	bl	801f504 <HAL_UART_Init>
  8018d74:	4603      	mov	r3, r0
  8018d76:	2b00      	cmp	r3, #0
- 8018d78:	d001      	beq.n	8018d7e <MX_UART5_Init+0x52>
+ 8018d78:	d001      	beq.n	8018d7e <MX_UART7_Init+0x52>
   {
     Error_Handler();
  8018d7a:	f7ff f85f 	bl	8017e3c <Error_Handler>
   }
-  /* USER CODE BEGIN UART5_Init 2 */
-	HAL_UARTEx_ReceiveToIdle_IT(&huart5, PORT1_PORT_RX_BUF, UART_INTR_BUFF_SIZE);//To Enable Next Interrupt
+  /* USER CODE BEGIN UART7_Init 2 */
+	HAL_UARTEx_ReceiveToIdle_IT(&huart7, PORT2_PORT_RX_BUF, UART_INTR_BUFF_SIZE);//To Enable Next Interrupt
  8018d7e:	2280      	movs	r2, #128	; 0x80
- 8018d80:	4904      	ldr	r1, [pc, #16]	; (8018d94 <MX_UART5_Init+0x68>)
- 8018d82:	4802      	ldr	r0, [pc, #8]	; (8018d8c <MX_UART5_Init+0x60>)
+ 8018d80:	4904      	ldr	r1, [pc, #16]	; (8018d94 <MX_UART7_Init+0x68>)
+ 8018d82:	4802      	ldr	r0, [pc, #8]	; (8018d8c <MX_UART7_Init+0x60>)
  8018d84:	f007 ff2a 	bl	8020bdc <HAL_UARTEx_ReceiveToIdle_IT>
-  /* USER CODE END UART5_Init 2 */
+  /* USER CODE END UART7_Init 2 */
 
 }
  8018d88:	bf00      	nop
  8018d8a:	bd80      	pop	{r7, pc}
- 8018d8c:	2000db48 	.word	0x2000db48
- 8018d90:	40005000 	.word	0x40005000
- 8018d94:	2000d910 	.word	0x2000d910
+ 8018d8c:	2000dc00 	.word	0x2000dc00
+ 8018d90:	40007800 	.word	0x40007800
+ 8018d94:	2000d990 	.word	0x2000d990
 
 08018d98 <MX_USART1_UART_Init>:
-
-}
 /* USART1 init function */
 
 void MX_USART1_UART_Init(void)

@@ -157,7 +157,7 @@ int main(void)
 		printf("Initializing Ethernet Done\n");
 		if((EI_data.Hitachi_st.EnableSerialPort > 0) && (EI_data.Hitachi_st.BaudRate > 0) )
 		{
-			MX_UART7_Init();
+			MX_UART5_Init();
 			printf("Initializing UART with BaudRate:%lu\n",EI_data.Hitachi_st.BaudRate);
 			UART4_Init(EI_data.Hitachi_st.BaudRate);
 		}

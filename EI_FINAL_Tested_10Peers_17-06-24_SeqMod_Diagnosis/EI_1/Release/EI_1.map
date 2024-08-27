@@ -336,7 +336,7 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./Core/Src/usart.o
  .text.MX_UART4_Init
                 0x0000000000000000       0x48 ./Core/Src/usart.o
- .text.MX_UART7_Init
+ .text.MX_UART5_Init
                 0x0000000000000000       0x48 ./Core/Src/usart.o
  .text.HAL_UART_MspDeInit
                 0x0000000000000000       0xb8 ./Core/Src/usart.o
@@ -3247,9 +3247,9 @@ LOAD c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
  .text.SystemInit
                 0x000000000800c520       0x14 ./Core/Src/system_stm32f7xx.o
                 0x000000000800c520                SystemInit
- .text.MX_UART5_Init
+ .text.MX_UART7_Init
                 0x000000000800c534       0x48 ./Core/Src/usart.o
-                0x000000000800c534                MX_UART5_Init
+                0x000000000800c534                MX_UART7_Init
  .text.MX_USART1_UART_Init
                 0x000000000800c57c       0x48 ./Core/Src/usart.o
                 0x000000000800c57c                MX_USART1_UART_Init
