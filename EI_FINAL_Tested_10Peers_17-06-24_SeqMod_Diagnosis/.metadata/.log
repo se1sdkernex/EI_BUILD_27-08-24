@@ -1,0 +1,42 @@
+!SESSION 2024-08-27 10:33:08.906 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-08-27 10:33:15.391
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-08-27 10:33:15.484
+!MESSAGE Log4j initialized with config file D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-08-27 10:33:18.780
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-27 10:34:36.156
+!MESSAGE Indexed 'EI_1' (136 sources, 322 headers) in 15.5 sec: 20,168 declarations; 129,866 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-27 10:34:45.387
+!MESSAGE Indexed 'EI_2' (136 sources, 322 headers) in 9.12 sec: 20,157 declarations; 129,668 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-27 10:39:48.640
+!MESSAGE Indexed 'EI_1' (136 sources, 322 headers) in 10.1 sec: 20,168 declarations; 129,866 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-27 10:40:05.514
+!MESSAGE Indexed 'EI_2' (136 sources, 322 headers) in 9.78 sec: 20,157 declarations; 129,668 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+!SESSION 2024-08-27 13:04:03.842 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-08-27 13:04:25.400
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-08-27 13:04:25.483
+!MESSAGE Log4j initialized with config file D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-08-27 13:04:45.370
+!MESSAGE Started RMI Server, listening on port 41338

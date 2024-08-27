@@ -1,0 +1,366 @@
+/*
+ * Config.c
+ *
+ *  Created on: May 10, 2023
+ *      Author: Ravi Teja P
+ */
+
+
+#include "Headers.h"
+
+EI_t *EI_Config_ptr;
+EI_t EI_data;
+EI_t EI_BeforeReorderData;
+
+DAT_CRC_XCHANGE_t DatCrcXchangeSelf_st,DatCrcXchangeOther_st;
+
+uint8_t Dats_Request_Flag = 0;
+uint8_t Debug_flag = 0;
+uint8_t Config_Buff[1024] = {0,};
+uint8_t Slot = 0;
+uint8_t gucFlagUpdate;
+uint8_t gucUpdateFlag;
+uint8_t UpdateFlag;
+uint32_t gucReqstCurTim;
+uint8_t Commands_List[20][50] = {{0,},};
+uint8_t Commands_Count = 0;
+
+
+void Update_HitachiCommands(void)
+{
+	uint8_t CmdCnt = 0;
+
+	Commands_List[CmdCnt][0] = 0X24;
+	Commands_List[CmdCnt][1] = 0X01;
+	Commands_List[CmdCnt][2] = 0X30;
+	Commands_List[CmdCnt][3] = 0X40;
+	Commands_List[CmdCnt][4] = 0XC0;
+	Commands_List[CmdCnt][5] = 0X4E;
+	Commands_List[CmdCnt][6] = 0X26;
+	++CmdCnt;
+
+
+
+
+	strcpy( (char *)Commands_List[CmdCnt++], (const char *)"DEBUG_MODE");
+	strcpy( (char *)Commands_List[CmdCnt++], (const char *)"INVALID_ADDRESS");
+	strcpy( (char *)Commands_List[CmdCnt++], (const char *)"INVALID_BOOLEAN");
+	strcpy( (char *)Commands_List[CmdCnt++], (const char *)"STALE_DATA_TIMEOUT");
+	strcpy( (char *)Commands_List[CmdCnt++], (const char *)"RX_VITAL_INIT_FAIL");
+	strcpy( (char *)Commands_List[CmdCnt++], (const char *)"TX_VITAL_INIT_FAIL");
+	strcpy( (char *)Commands_List[CmdCnt++], (const char *)"CLEAR_ALL");
+	strcpy( (char *)Commands_List[CmdCnt++], (const char *)"HELP");
+	Commands_Count =  CmdCnt;
+}
+
+
+
+
+
+
+PUTCHAR_PROTOTYPE
+{
+	HAL_UART_Transmit(&huart1, (uint8_t*) &ch, 1, 0xFFFF);
+	//HAL_UART_Transmit(&DLL_COM, (uint8_t*) &ch, 1, 0xFFFF);
+	setvbuf(stdout, NULL, _IONBF, 0); //For printing even without Newline
+	return ch;
+}
+
+
+
+void Get_Slot(void)
+{
+	uint8_t Local_SlotID = 0;
+	uint8_t *ptr = (uint8_t *)&Slot;
+	Local_SlotID |= (!HAL_GPIO_ReadPin(IP3_GPIO_Port, IP3_Pin)) << 0;
+	Local_SlotID |= (!HAL_GPIO_ReadPin(IP4_GPIO_Port, IP4_Pin)) << 1;
+	Local_SlotID |= (!HAL_GPIO_ReadPin(IP5_GPIO_Port, IP5_Pin)) << 2;
+
+	*ptr = Local_SlotID;
+
+}
+
+
+
+
+void Check_for_cmd(void)
+{
+	//	unsigned char ch[20] = {0,},i=0;
+	uint8_t IS_COMMAND_RECEIVED = NO;
+	uint8_t Index = 0;
+	uint8_t Byte = 0;
+	uint8_t Buffer[100] = {0,};
+	if(HAL_Elaps_Ticks(Isp_Intr_Clk) < 10)
+	{
+		return;
+	}
+	else
+	{
+		while(Com_DataReady(ISP_PORT))
+		{
+			Byte = Com_Get_Byte(ISP_PORT);
+			Buffer[Index++] = Byte;
+		}
+		if(Index>0)
+		{
+			Buffer[Index] = 0;
+			printf("Received from ISP:%s\n",Buffer);
+			switch(Is_Command_Valid(Buffer,Index))
+			{
+			case ZERO:
+				Dats_Request_Flag = 1;
+				printf("\n*************PLEASE LOAD EI DATS USING APPLICATION************\n");
+				break;
+			case ONE:
+				printf("Received \"%s\":%u\n",Commands_List[ONE],(Buffer[Index-1])-'0');
+				if( (((Buffer[Index-1])-'0') >= 0) && ((Buffer[Index-1])-'0') < 2)
+				{
+					Debug_flag = (Buffer[Index-1])-'0';
+				}
+				else
+				{
+					printf("Please Send Valid Command\n");
+				}
+				IS_COMMAND_RECEIVED = YES;
+				break;
+
+			case TWO:
+				printf("Received %s for Peer:%u\n",Commands_List[TWO],(Buffer[Index-1])-'0'); /* Invalid Address*/
+				printf("Invalid Addess\n");
+				SET_BIT_USER(4,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= ((Buffer[Index-1])-'0');
+				IS_COMMAND_RECEIVED = YES;
+				printf("\nFAULT BITS:%08lx\n",Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				break;
+
+			case THREE:
+				/* Invalid Boolean Inputs, To do this case 1st we Have to break the Communication of the Peer
+				 * By Either Not reply to peer up to stale Data Time (or) By Rejecting Packets of the Up to stale data time out.
+				 */
+				printf("Received %s for Peer:%u\n",Commands_List[THREE],(Buffer[Index-1])-'0');
+				printf("Invalid Boolean\n");
+				Hitachi_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(5,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX =  ((Buffer[Index-1])-'0');
+				IS_COMMAND_RECEIVED = YES;
+				printf("\nFAULT BITS:%08lx\n",Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				break;
+
+			case FOUR:
+				printf("Received %s for Peer:%u\n",Commands_List[FOUR],(Buffer[Index-1])-'0'); /* STALE Data Timeout by Not Replying to the Peer */
+				printf("Making Ethernet TX Disable\n");
+				SET_BIT_USER(9,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= ((Buffer[Index-1])-'0');
+				IS_COMMAND_RECEIVED = YES;
+				break;
+
+			case FIVE:
+				/* Vital Init Value Received from MICROLOK will be Modified */
+				printf("Received %s for Peer:%u\n",Commands_List[FIVE],(Buffer[Index-1])-'0');
+				SET_BIT_USER(0,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= ((Buffer[Index-1])-'0');
+				IS_COMMAND_RECEIVED = YES;
+				break;
+
+			case SIX:
+				/* Vital Init Value Sent by EIPC to MICROLOK
+				 * is going to be Random value which will be prepend to the Message and CRC calculated and sent to MICROLOK
+				 * This will make the CRC to Fail at MICROLOK end.
+				 */
+				printf("Received %s for Peer:%u\n",Commands_List[SIX],(Buffer[Index-1])-'0');
+				SET_BIT_USER(1,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= ((Buffer[Index-1])-'0');
+				IS_COMMAND_RECEIVED = YES;
+				break;
+			case SEVEN:
+				/* CLEAR ALL */
+				printf("Received %s\n",Commands_List[SEVEN]);
+				Hitachi_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= 0XFF;
+				IS_COMMAND_RECEIVED = YES;
+
+				break;
+			case EIGHT:
+				printf("Received %s Command\n",Commands_List[EIGHT]);
+				break;
+			case NINE:
+				printf("Received %s for Peer:%u\n",Commands_List[NINE],(Buffer[Index-1])-'0');
+				break;
+
+			default:
+				printf("Please Send Valid Command\n");
+			}
+		}
+
+		if(IS_COMMAND_RECEIVED == YES)
+		{
+			TransmitCanPkt(CAN_FAULT_INJECTION);
+		}
+	}
+
+
+#if 0
+
+	while(Com_DataReady(ISP_PORT))
+	{
+		if(i>15)
+		{
+			i=0;
+		}
+		ch[i] = Com_Get_Byte(ISP_PORT);
+		printf("Received cmd:%c\n",ch[i]);
+		if(ch[i] == 0x0D)
+		{
+			printf("\n_____________________________ COMMAND RECEIVED _____________________________\n");
+			IS_COMMAND_RECEIVED = YES;
+			switch(ch[0])
+			{
+			case 'A':
+			case 'a':
+				printf("RX Vital Init Value failure Injection\n");
+				SET_BIT_USER(0,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= (ch[1]-'0');
+				printf("Received Peer Index:%u\n",Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX);
+				break;
+
+			case 'B':
+			case 'b':
+				printf("TX Vital Init Value failure Injection\n");
+				SET_BIT_USER(1,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= (ch[1]-'0');
+				break;
+
+			case 'C':
+			case 'c':
+				printf("TX Seq failure Injection\n");
+				SET_BIT_USER(2,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= (ch[1]-'0');
+				break;
+
+			case 'D':
+			case 'd':
+				printf("RX Seq failure Injection\n");
+				SET_BIT_USER(3,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= (ch[1]-'0');
+				break;
+
+			case 'E':
+			case 'e':
+				printf("Wrong Destination Address failure Injection\n");
+				SET_BIT_USER(4,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= (ch[1]-'0');
+				break;
+
+			case 'F':
+			case 'f':
+				printf("Invalid Boolean value Outputs failure Injection\n");
+				SET_BIT_USER(5,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= (ch[1]-'0');
+				break;
+
+			case 'G':
+			case 'g':
+				printf("Making Ethernet Data Not Received\n");
+				SET_BIT_USER(6,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				break;
+
+			case 'H':
+			case 'h':
+				printf("Making CAN RX Disable\n");
+				SET_BIT_USER(7,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				break;
+
+			case 'I':
+			case 'i':
+				printf("Making CAN TX Disable\n");
+				SET_BIT_USER(8,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				break;
+			case 'J':
+			case 'j':
+				printf("Making Ethernet TX Disable\n");
+				SET_BIT_USER(9,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= (ch[1]-'0');
+				break;
+
+			case 'K':
+			case 'k':
+				printf("Clearing All Flags except VITAL DATA flag\n");
+				Hitachi_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				SET_BIT_USER(5,Hitachi_fault_injection_st.FAULT_INJECTION_BITS);
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX = (ch[1]-'0');
+				//printf("FAULT_INJECTION_BITS:%lu\n",FAULT_INJECTION_BITS);
+				//printf("FOR_WHICH_PEER_INDEX:%u\n",FOR_WHICH_PEER_INDEX);
+				Rx_Seq_failure = 0;
+				break;
+
+			case 'Z':
+			case 'z':
+				Hitachi_fault_injection_st.FAULT_INJECTION_BITS = 0;
+				Hitachi_fault_injection_st.FOR_WHICH_PEER_INDEX= 0XFF;
+				Rx_Seq_failure = 0;
+				break;
+
+			default:
+				printf("Wrong Command\n");
+			}
+		}
+		else
+		{
+			i++;
+		}
+	}
+
+	if(IS_COMMAND_RECEIVED == YES)
+	{
+		TransmitCanPkt(CAN_FAULT_INJECTION);
+	}
+
+#endif
+}
+
+uint8_t Is_Command_Valid(uint8_t *Buffer,uint8_t Length)
+{
+	for(uint8_t Traverser = 0; Traverser < Commands_Count; ++Traverser)
+	{
+		//		if(strstr((char *)Buffer,(char *)Commands_List[Traverser]) != NULL)
+		if(memcmp(Buffer,Commands_List[Traverser],strlen((char *)Commands_List[Traverser])) == 0)
+		{
+			return Traverser;
+		}
+	}
+	return 255;
+}
+
+void PrintCmdList(void)
+{
+	printf("Please use Below Commands for FIT\n");
+	for(uint8_t Traverser = 0;Traverser<Commands_Count;++Traverser)
+	{
+		printf("%s\n",Commands_List[Traverser]);
+	}
+}
+
+void CheckEIPC_DAT_CRC(void)
+{
+	static uint32_t CheckClk = 0;
+
+	if(HAL_Elaps_Ticks(CheckClk) > FOUR_SEC)
+	{
+		if((DatCrcXchangeSelf_st.App_CRC != DatCrcXchangeOther_st.App_CRC) && (DatCrcXchangeOther_st.App_CRC != 0))
+		{
+			printf("\nEIPC's are not in Sync.....!!!!!\n");
+			printf("Self CRC:%04X\n",DatCrcXchangeSelf_st.App_CRC);
+			printf("Other CRC:%04X\n",DatCrcXchangeOther_st.App_CRC);
+		}
+
+
+#ifdef EI_1
+		TransmitCanPkt(DAT_CRC_EXCHANGE_1)
+#endif
+
+
+
+		CheckClk = HAL_GetTick();
+
+	}
+}
