@@ -1,0 +1,14 @@
+../../EI_1/Drivers/CMSIS/Include/core_cm7.h:2147:34:__NVIC_SystemReset	4	static,ignoring_inline_asm
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:46:6:MX_SPI1_Init	8	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:80:6:HAL_SPI_MspInit	56	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:127:6:HAL_SPI_MspDeInit	16	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:158:6:saveToFlash	32	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:188:10:SPI_WriteInFlash	32	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:293:5:SPI_MemoryEraseBySector	24	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:384:6:readFromFlash	32	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:411:6:SPI_ReadFromFlash	24	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:466:6:Get_Config	24	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:518:6:Data_Processing	8	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:534:6:AutoLoadDat	24	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:584:15:saveConfig	24	static
+D:/_ei/EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diagnosis_NO_CAN/EI_1/Core/Src/spi.c:630:6:Print_BuildDat_Details	8	static

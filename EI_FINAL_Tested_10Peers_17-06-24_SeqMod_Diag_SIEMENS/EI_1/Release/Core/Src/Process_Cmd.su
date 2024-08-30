@@ -1,0 +1,6 @@
+../Core/Src/Process_Cmd.c:39:11:ReadAndFormMsg	40	static
+../Core/Src/Process_Cmd.c:183:6:SendAck	40	static
+../Core/Src/Process_Cmd.c:12:15:CheckForRqst	32	static
+../Core/Src/Process_Cmd.c:209:11:ReadAndFormConfig	32	static
+../Core/Src/Process_Cmd.c:363:20:CommReadAndFormMessage	32	static
+../Core/Src/Process_Cmd.c:336:15:CheckDocklightForRqst	32	static

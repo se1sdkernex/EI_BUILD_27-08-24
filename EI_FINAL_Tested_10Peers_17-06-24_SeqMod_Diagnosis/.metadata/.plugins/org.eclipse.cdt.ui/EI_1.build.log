@@ -1,4 +1,4 @@
-18:05:54 **** Incremental Build of configuration Release for project EI_1 ****
+14:44:11 **** Incremental Build of configuration Release for project EI_1 ****
 make -j12 all 
 del_hex.bat
 Current Folder: EI_1
@@ -16,5 +16,5 @@ EI_1.hex
         1 file(s) copied.
  
 
-18:05:56 Build Finished. 0 errors, 0 warnings. (took 2s.682ms)
+14:44:12 Build Finished. 0 errors, 0 warnings. (took 1s.697ms)
 

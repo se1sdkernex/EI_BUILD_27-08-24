@@ -1,0 +1,27 @@
+!SESSION 2024-08-29 15:01:42.199 -----------------------------------------------
+eclipse.buildId=Version 1.10.1
+java.version=11.0.14.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diag_SIEMENS
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-08-29 15:01:49.055
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-08-29 15:01:49.154
+!MESSAGE Log4j initialized with config file D:\_ei\EI_FINAL_Tested_10Peers_17-06-24_SeqMod_Diag_SIEMENS\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-08-29 15:01:53.327
+!MESSAGE Started RMI Server, listening on port 41339
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-29 15:02:26.223
+!MESSAGE Indexed 'EI_1' (136 sources, 322 headers) in 12.7 sec: 20,168 declarations; 129,888 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-29 15:02:32.141
+!MESSAGE Indexed 'EI_2' (136 sources, 322 headers) in 5.71 sec: 20,157 declarations; 129,683 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-29 15:04:34.165
+!MESSAGE Indexed 'EI_1' (136 sources, 322 headers) in 9.86 sec: 20,168 declarations; 129,888 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-08-29 15:05:23.695
+!MESSAGE Indexed 'EI_2' (136 sources, 322 headers) in 14 sec: 20,157 declarations; 129,683 references; 3 unresolved inclusions; 44 syntax errors; 164 unresolved names (0.11%)

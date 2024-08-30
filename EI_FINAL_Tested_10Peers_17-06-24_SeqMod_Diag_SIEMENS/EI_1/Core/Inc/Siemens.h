@@ -1,0 +1,212 @@
+/*
+ * Siemens.h
+ *
+ *  Created on: Sep 25, 2023
+ *      Author: Ravi Teja P
+ */
+
+#ifndef INC_SIEMENS_H_
+#define INC_SIEMENS_H_
+
+#include "Headers.h"
+
+
+
+/*
+ *		_________________________ SIEMENS_EI __________________________________________________
+ *
+ *
+ */
+
+#define EN_SIEMENS_FAULTINJECTION 1
+
+#define GETPIN(x)	(VitalData2MIE_st.Relays[((x-1)/8)] & (1 << ((x-1)%8)))
+
+
+
+#define EVEN_PARITY 			0
+#define ODD_PARITY				1
+#define NO_PARITY				2
+#define REPLY_MAX_SIZE			1536
+#define SELF_ADDRESS			0x143242
+#define PROD_VERSION			0X02 /* Needs to be in Config */
+#define COMP_INDEX				0X01
+#define VERIFY					0
+#define CONVERT					1
+#define SIEMENS_DEBUG			0
+
+
+#define RECEIVING				1
+#define NOT_RECEIVING			0
+#define TX						1
+#define RX						2
+
+
+/* FAULT INJECTION BITS */
+
+typedef enum
+{
+	INVALID_DES_SYS_TYPE=0,
+	INVALID_SRC_SYS_TYPE=1,
+	INVALID_SRC_ADDR=2,
+	INVALID_DES_PORT=3,
+	INVALID_SRC_PORT=4,
+	INVALID_PACKET_CRC_SIEMENS=5,
+	NO_REPLY_FROM_EIPC	=6,
+	INVALID_PACKET_CRC_EIPC=7,
+	INVALID_COMP_PACKET_CRC_SIEMENS=8,
+	INVALID_COMP_PACKET_CRC_EIPC=9,
+}SIEMENS_FAULT_e;
+
+//#define INVALID_DES_SYS_TYPE			0
+//#define INVALID_SRC_SYS_TYPE			1
+//#define INVALID_SRC_ADDR				2
+//#define INVALID_DES_PORT				3
+//#define INVALID_SRC_PORT				4
+//#define INAVLID_PACKET_CRC_SIEMENS		5
+//#define NO_REPLY_FROM_EIPC				6
+//#define INVALID_PACKET_CRC_EIPC			7
+//#define INVALID_COMP_PACKET_CRC_SIEMENS	8
+//#define INVALID_COMP_PACKET_CRC_EIPC	9
+
+/* FAULT INJECTION BITS */
+
+
+#define MAX_SIEMENS_PKT_LENGTH	1536
+#define SIEMENS_MAX_RELAY_SIZE	512
+
+#pragma pack(4)
+
+typedef struct
+{
+	uint8_t No_of_IP_s;
+	uint8_t DestSysType;
+	uint8_t SourceSysType;
+	uint8_t DestPort;
+	uint8_t SourcePort;
+	uint8_t Self_IP[EIPC_CARDS][IP_LENGTH];
+	uint8_t Self_MAC[EIPC_CARDS][MAC_LENGTH];
+	uint8_t Source_IP[EIPC_CARDS][SIEMENS_MAX_IP][IP_LENGTH];
+	uint16_t Self_Listening_Port[EIPC_CARDS];
+	uint16_t PORTS[EIPC_CARDS][SIEMENS_MAX_IP][PORTS_CNT_PER_IP];
+	uint16_t Booloutputs;
+	uint32_t SourceAddress;
+	uint32_t DestAddress;
+	uint32_t CAN_Xchange_Time;
+	uint32_t CAN_EXCHANGE_TIME_OUT;
+	uint32_t HEALTH_PACKET_TIME;
+	uint32_t COMM_FAILURE_TIME_OUT; /* Communication Failure Means No Data Received for Certain Time */
+	uint32_t MIE_SIGNAL_SEND_CLK;
+	uint32_t Max_NoRXTSUpdatedFailCount;
+}SIEMENS_t;
+
+typedef struct
+{
+	uint8_t DesSysType;
+	uint32_t DestAddr;
+	uint32_t ExtDestAddr;
+	uint8_t SrcSysType;
+	uint32_t SourceAddr;
+	uint32_t ExtSourceAddr;
+	uint8_t ProdDataVer;
+	uint8_t CompIndex;
+	uint8_t DestPort;
+	uint8_t SourcePort;
+	uint32_t RxTimeStamp;
+	uint32_t TxTimeStamp;
+	uint16_t No_ofDataBytes;
+	uint8_t AppData[SIEMENS_MAX_RELAY_SIZE];
+	uint16_t crc;
+} SIEMENS_PKT_t;
+
+typedef struct
+{
+	uint8_t Tx_Buff[MAX_SIEMENS_PKT_LENGTH];
+	uint16_t Tx_Length;
+}SIEMENS_TX_PKT_t;
+
+typedef struct
+{
+	uint32_t FAULT_INJECTION_BITS;
+	uint8_t EnableDisableFlag;
+}SIEMENS_FAULT_INJECTION_t;
+
+typedef struct
+{
+	uint16_t NoofDataBytes;
+	uint8_t Relays[SIEMENS_MAX_RELAY_SIZE];
+}VITAL_DATA_t;
+
+typedef struct
+{
+	/* Lookup Please do not change Order of Variables*/
+	uint16_t NoofDataBytes;
+	uint16_t VitalCRC;
+	uint8_t Relays[SIEMENS_MAX_RELAY_SIZE];
+}VITAL_DATA_SHARING_t;
+
+typedef struct
+{
+	uint8_t DataReceving;
+	uint8_t MesgReceived;
+	uint16_t RxTimeStampNotUpdatedCount;
+
+}SIEMENS_SELF_SHARING_t;
+
+
+typedef struct
+{
+	uint8_t MisMatchFlag;
+	uint8_t SiemensCanXchangeHappening;
+	uint32_t Signal2MIE_Clk;
+	uint32_t SelfSharingClk;
+	uint32_t LastReceiveClk;
+	uint32_t Relays2OtheClk;
+	uint32_t RelayMisMatchCheckClk;
+	uint32_t SiemensRCV_SELF_XCHG_CLK;
+}SIEMENS_CLOCKS_t;
+
+
+extern SIEMENS_PKT_t Siemens_RX_st,Siemens_TX_st;
+extern SIEMENS_TX_PKT_t Siemens_tx_Buffer_st;
+extern SIEMENS_FAULT_INJECTION_t Siemens_fault_injection_st;
+extern SIEMENS_SELF_SHARING_t Tx_Siemens_self_sharing_st,Rx_Siemens_self_sharing_st,Temp_Siemens_self_sharing_st;
+extern VITAL_DATA_t VitalData2MIE_st;
+extern VITAL_DATA_SHARING_t SiemensMain_Relays_st,Siemens_OtherRelays_st,TempSiemensRx_OtherRelays_st;
+extern SIEMENS_CLOCKS_t SiemensClocks_st;
+
+extern uint32_t SelfTimeStamp;
+
+
+void Print_Siemens_MSG(SIEMENS_PKT_t *SiemensPrint_st,uint8_t *Buff,uint16_t Length,uint8_t TX_RX);
+
+uint8_t Calculate_Parity(uint8_t Buff, uint8_t Parity_Type);
+int32_t Extract_Parity_Data(uint8_t Start,uint8_t No_of_Bits,uint8_t *DataIn,uint8_t Parity_Type);
+uint8_t Verify_parity(uint8_t *Data,uint8_t Length,uint8_t Parity_Type);
+void Siemens_Data_Analyser(void);
+uint16_t ExtractAppData(uint8_t *MainBuffer, uint16_t MainBufferLength, uint8_t *ExtractBuffer);
+uint16_t Siemens_CRC(uint8_t *data, uint16_t len);
+void Form_Siemens_Reply(void);
+void Process_SiemensEI(void);
+void Insert_cal_parity(uint8_t start, uint8_t No_of_Bits, uint8_t *Dest_Buff, uint64_t DataIn, uint8_t Parity_Type);
+uint16_t Data_Compliment(uint8_t *Buff,uint16_t Size,uint8_t Type);
+
+void Chech_forSiemensCMD(void);
+uint8_t Is_SiemensCommand_Valid(uint8_t *Buffer,uint8_t Length);
+void Update_SiemensCommands(void);
+
+void ProcessSendingSignals2MIE(void);
+void ProcessSelfSharing(void);
+void ProcessDetectNoValidDataReceive(void);
+void SendRelays2Other(void);
+void CheckRelayMisMatch(void);
+void Detect_SiemensCAN_Xchange_Failure(void);
+
+void CheckToSendReplyorNot(void);
+void GetTimeStamp(void);
+
+void PrintSignals(void);
+void UpdateSIGNALSNames(void);
+void print_self_DetailsSiemens(void);
+
+#endif /* INC_SIEMENS_H_ */

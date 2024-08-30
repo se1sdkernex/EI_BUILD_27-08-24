@@ -1,0 +1,10 @@
+2024-08-29 15:01:49,156 [INFO] Activator:177 - 
+
+
+2024-08-29 15:01:49,156 [INFO] Activator:178 - !SESSION log4j initialized
+2024-08-29 15:02:14,347 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2024-08-29 15:02:14,347 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2024-08-29 15:02:14,347 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2024-08-29 17:08:59,534 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2024-08-29 17:08:59,550 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2024-08-29 17:08:59,550 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com

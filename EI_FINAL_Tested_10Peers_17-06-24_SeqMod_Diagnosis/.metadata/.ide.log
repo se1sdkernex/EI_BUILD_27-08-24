@@ -12,3 +12,23 @@
 2024-08-27 13:05:06,278 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 2024-08-27 13:05:06,281 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
 2024-08-27 13:05:06,282 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2024-08-27 17:55:14,839 [INFO] Activator:177 - 
+
+
+2024-08-27 17:55:14,839 [INFO] Activator:178 - !SESSION log4j initialized
+2024-08-27 17:55:48,422 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2024-08-27 17:55:48,437 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2024-08-27 17:55:48,439 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2024-08-29 14:30:27,296 [INFO] Activator:177 - 
+
+
+2024-08-29 14:30:27,296 [INFO] Activator:178 - !SESSION log4j initialized
+2024-08-29 14:30:33,123 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2024-08-29 14:30:33,123 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2024-08-29 14:30:33,123 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2024-08-29 14:31:06,944 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2024-08-29 14:31:06,944 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2024-08-29 14:31:06,949 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2024-08-29 14:44:17,164 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2024-08-29 14:44:17,172 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2024-08-29 14:44:17,172 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
